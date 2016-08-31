@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Security.Claims;
@@ -14,19 +16,26 @@ namespace Module.Core
 {
     public abstract class BaseDbContext : DbContext
     {
-        public BaseDbContext()
-            : this("DefaultConnection")
+        #region ctor
+        protected BaseDbContext()
+    : this("DefaultConnection")
         {
 
         }
 
+        protected BaseDbContext(DbConnection connection) : base(connection, true)
+        {
 
-        public BaseDbContext(string connStr)
+        }
+
+        protected BaseDbContext(string connStr)
             : base(connStr)
         {
 
         }
+        #endregion
 
+        #region SaveChanges
         public override int SaveChanges()
         {
             try
@@ -40,7 +49,6 @@ namespace Module.Core
                 throw;
             }
         }
-
         public override Task<int> SaveChangesAsync()
         {
             try
@@ -54,7 +62,6 @@ namespace Module.Core
                 throw;
             }
         }
-
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             try
@@ -67,8 +74,10 @@ namespace Module.Core
                 LogDbEntityValidationException(ex);
                 throw;
             }
-        }
+        } 
+        #endregion
 
+        #region ApplyConcepts
         private void ApplyConcepts()
         {
             foreach (DbEntityEntry entry in this.ChangeTracker.Entries())
@@ -93,7 +102,6 @@ namespace Module.Core
                 }
             }
         }
-
         private void SetModificationAuditProperties(DbEntityEntry entry)
         {
             if (entry.Entity is IModification)
@@ -103,7 +111,6 @@ namespace Module.Core
                 entity.LastModifierUserId = GetUserId();
             }
         }
-
         private void HandleSoftDelete(DbEntityEntry entry)
         {
             if (entry.Entity is ISoftDelete)
@@ -119,7 +126,6 @@ namespace Module.Core
                 }
             }
         }
-
         private void SetCreationAuditProperties(DbEntityEntry entry)
         {
             if (entry.Entity is ICreatorEntity)
@@ -129,7 +135,6 @@ namespace Module.Core
                 entity.CreatorId = GetUserId();
             }
         }
-
         private string GetUserId()
         {
             var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
@@ -140,10 +145,21 @@ namespace Module.Core
                 return null;
             return claimsIdentity.GetUserId();
         }
+        #endregion
 
+        #region OnModelCreating
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+        }
+        #endregion
+
+        #region Log
         private void LogDbEntityValidationException(DbEntityValidationException dbEntityValidationException)
         {
             //todo log
-        }
+        } 
+        #endregion
     }
 }
