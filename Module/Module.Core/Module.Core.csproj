@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDbContext.cs" />
+    <Compile Include="BaseDevDbContext.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="CreatorEntity.cs" />
     <Compile Include="ICreatorEntity.cs" />
