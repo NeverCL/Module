@@ -4,13 +4,15 @@ Module 框架
 
 - Module.NPOI
 
+- Module.Autofac.NLog
+
+- Module.Autofac.Validate
+
 - Module.Web.FileInput
 
 - Module.Web.Editor
 
 - Module.Angular.Pager
-
-- Module.Autofac.Validate
 
 - Module.Tests
 
@@ -18,6 +20,6 @@ Module 框架
 
 - Module.Application
 
-- Module.Auth
-
 - Module.WebApi
+
+- Module.Auth
