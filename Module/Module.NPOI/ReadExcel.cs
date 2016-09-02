@@ -33,21 +33,21 @@ namespace Module.NPOI
                 }
 
                 var list = new List<T>();
-                for (int i = 1; i < sheet.LastRowNum + 2; i++)
+                for (int i = 1; i <= sheet.LastRowNum ; i++)
                 {
                     row = sheet.GetRow(i);
+                    var obj = new T();
                     for (int j = 0; j < row.Cells.Count; j++)
                     {
                         var value = row.GetCell(j).ToString();
                         if (headers.Any(x => x.TitleId == j))
                         {
-                            var obj = new T();
                             var prop = typeof(T).GetProperties()[headers.First(x => x.TitleId == j).OrderId];
                             var newVal = Convert.ChangeType(value, prop.PropertyType);
                             prop.SetValue(obj, newVal);
-                            list.Add(obj);
                         }
                     }
+                    list.Add(obj);
                 }
                 return list;
             }
