@@ -12,4 +12,9 @@ namespace Module.Core
         public DateTime? DeletionTime { get; set; }
         public bool IsDeleted { get; set; }
     }
+
+    public class FullAuditedEntity : FullAuditedEntity<long>
+    {
+
+    }
 }
