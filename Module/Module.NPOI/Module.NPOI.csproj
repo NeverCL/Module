@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReadExcel.cs" />
-    <Compile Include="WriteExcel.cs" />
+    <Compile Include="WriteExcelHelp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

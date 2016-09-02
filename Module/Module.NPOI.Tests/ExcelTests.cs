@@ -19,7 +19,7 @@ namespace Module.NPOI.Tests
             {
                 data.Add(new Model { Name = "测试名称" + i, Id = i, Time = DateTime.Now });
             }
-            data.WriteXls("2.xls");
+            data.WriteExcel("2.xls");
         }
 
 
@@ -40,7 +40,7 @@ namespace Module.NPOI.Tests
             {
                 data.Add(new Model { Name = "测试名称" + i, Id = i, Time = DateTime.Now });
             }
-            WriteExcel.WriteBulkXls(data, data, data);
+            WriteExcelHelp.WriteBulkExcel("3.xls",data, data, data);
         }
     }
 

@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using NPOI.SS.Format;
@@ -15,30 +16,66 @@ using NPOI.XSSF.UserModel;
 
 namespace Module.NPOI
 {
-    public static class WriteExcel
+    public static class WriteExcelHelp
     {
         public static string DefaultSheetName = "sheet1";
 
         #region WriteBulkXls
-        public static HSSFWorkbook WriteBulkXls(params IEnumerable[] dataList)
+        public static string WriteBulkExcel(string fileName, params IEnumerable[] dataList)
         {
-            var workbook = new HSSFWorkbook();
+            IWorkbook workbook;
+            if (Path.GetExtension(fileName) == ".xls")
+            {
+                workbook = new HSSFWorkbook();
+            }
+            else if (Path.GetExtension(fileName) == ".xlsx")
+            {
+                workbook = new XSSFWorkbook();
+            }
+            else
+            {
+                return null;
+            }
+            var index = 0;
             foreach (var list in dataList)
             {
                 var type = list.GetType().GenericTypeArguments[0];
                 var sheetName = GetSheetName(type);
-                //BuildExcel<>(list, sheetName, workbook);
-                //todo build
+                index++;
+                InvokeStaticGenericMethod(new object[] { list, index + "-" + sheetName, workbook }, typeof(WriteExcelHelp), "BuildExcel", type);
             }
-            return null;
+            using (var fs = new FileStream(fileName, FileMode.Create))
+            {
+                workbook.Write(fs);
+            }
+            return fileName;
+        }
+
+        static void InvokeStaticGenericMethod(object[] args, Type classType, string methodName, Type genericType)
+        {
+            MethodInfo mi = classType.GetMethod(methodName);
+            MethodInfo miConstructed = mi.MakeGenericMethod(genericType);
+            miConstructed.Invoke(null, args);
         }
         #endregion
 
         #region WriteXls
-        public static string WriteXls<T>(this List<T> data, string fileName)
+        public static string WriteExcel<T>(this List<T> data, string fileName)
         {
             var sheetName = GetSheetName(data.GetType().GenericTypeArguments[0]);
-            var workbook = BuildXls(data, sheetName);
+            IWorkbook workbook;
+            if (Path.GetExtension(fileName) == ".xls")
+            {
+                workbook = BuildXls(data, sheetName);
+            }
+            else if (Path.GetExtension(fileName) == ".xlsx")
+            {
+                workbook = BuildXlsx(data, sheetName);
+            }
+            else
+            {
+                return null;
+            }
             using (var fs = new FileStream(fileName, FileMode.Create))
             {
                 workbook.Write(fs);
@@ -56,17 +93,6 @@ namespace Module.NPOI
                 return nameAttr.DisplayName;
             }
             return DefaultSheetName;
-        }
-
-        public static string WriteXlsx<T>(this List<T> data, string fileName)
-        {
-            var sheetName = GetSheetName(data.GetType().GenericTypeArguments[0]);
-            var workbook = BuildXlsx(data, sheetName);
-            using (var fs = new FileStream(fileName, FileMode.Create))
-            {
-                workbook.Write(fs);
-            }
-            return fileName;
         }
         #endregion
 
@@ -92,7 +118,7 @@ namespace Module.NPOI
             return workbook;
         }
 
-        private static void BuildExcel<T>(IList<T> data, string sheetName, IWorkbook workbook)
+        public static void BuildExcel<T>(IList<T> data, string sheetName, IWorkbook workbook)
         {
             var sheet = workbook.CreateSheet(sheetName); //创建工作表
             //1. Write Header
