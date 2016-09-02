@@ -10,6 +10,4 @@ namespace Module.Core
     {
         TPrimaryKey Id { get; set; }
     }
-
-
 }

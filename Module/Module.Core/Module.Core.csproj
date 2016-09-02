@@ -57,15 +57,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditedEntity.cs" />
     <Compile Include="BaseDbContext.cs" />
     <Compile Include="BaseDevDbContext.cs" />
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="CreatorEntity.cs" />
+    <Compile Include="BaseReleaseDbContext.cs" />
+    <Compile Include="CreationAuditedEntity.cs" />
+    <Compile Include="FullAuditedEntity.cs" />
     <Compile Include="ICreatorEntity.cs" />
     <Compile Include="IActived.cs" />
-    <Compile Include="IDeletion.cs" />
+    <Compile Include="IDeletionAudited.cs" />
     <Compile Include="IEntity.cs" />
-    <Compile Include="IModification.cs" />
+    <Compile Include="IModificationAudited.cs" />
     <Compile Include="IOrdered.cs" />
     <Compile Include="ISoftDelete.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,7 +2,7 @@
 
 namespace Module.Core
 {
-    public interface IModification
+    public interface IModificationAudited
     {
         DateTime? LastModificationTime { get; set; }
         string LastModifierUserId { get; set; }

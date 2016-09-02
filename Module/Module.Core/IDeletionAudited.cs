@@ -2,7 +2,7 @@
 
 namespace Module.Core
 {
-    public interface IDeletion : ISoftDelete
+    public interface IDeletionAudited : ISoftDelete
     {
         DateTime? DeletionTime { get; set; }
         string DeleterUserId { get; set; }

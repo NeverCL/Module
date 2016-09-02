@@ -74,7 +74,7 @@ namespace Module.Core
                 LogDbEntityValidationException(ex);
                 throw;
             }
-        } 
+        }
         #endregion
 
         #region ApplyConcepts
@@ -104,9 +104,9 @@ namespace Module.Core
         }
         private void SetModificationAuditProperties(DbEntityEntry entry)
         {
-            if (entry.Entity is IModification)
+            if (entry.Entity is IModificationAudited)
             {
-                var entity = entry.Entity as IModification;
+                var entity = entry.Entity as IModificationAudited;
                 entity.LastModificationTime = DateTime.Now;
                 entity.LastModifierUserId = GetUserId();
             }
@@ -118,9 +118,9 @@ namespace Module.Core
                 entry.State = EntityState.Unchanged;
                 var entity = entry.Entity as ISoftDelete;
                 entity.IsDeleted = true;
-                if (entry.Entity is IDeletion)
+                if (entry.Entity is IDeletionAudited)
                 {
-                    var deletionEntity = entry.Entity as IDeletion;
+                    var deletionEntity = entry.Entity as IDeletionAudited;
                     deletionEntity.DeletionTime = DateTime.Now;
                     deletionEntity.DeleterUserId = GetUserId();
                 }
@@ -159,7 +159,7 @@ namespace Module.Core
         private void LogDbEntityValidationException(DbEntityValidationException dbEntityValidationException)
         {
             //todo log
-        } 
+        }
         #endregion
     }
 }
