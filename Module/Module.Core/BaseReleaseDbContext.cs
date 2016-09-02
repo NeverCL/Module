@@ -24,13 +24,6 @@ namespace Module.Core
         {
             //使用Migrations
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TContext, TMigrationsConfiguration>());
-            //加速
-            using (var db = new TContext())
-            {
-                var objectContext = ((IObjectContextAdapter)db).ObjectContext;
-                var mappingCollection = (StorageMappingItemCollection)objectContext.MetadataWorkspace.GetItemCollection(DataSpace.CSSpace);
-                mappingCollection.GenerateViews(new List<EdmSchemaError>());
-            }
         }
     }
 }

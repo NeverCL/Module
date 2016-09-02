@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
+using System.Data.Entity.Core.Mapping;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Validation;
@@ -25,13 +27,21 @@ namespace Module.Core
 
         protected BaseDbContext(DbConnection connection) : base(connection, true)
         {
-
         }
 
         protected BaseDbContext(string connStr)
             : base(connStr)
         {
+        }
 
+        protected static void GenerateViews(DbContext dbContext)
+        {
+            using (var db = dbContext)
+            {
+                var objectContext = ((IObjectContextAdapter)db).ObjectContext;
+                var mappingCollection = (StorageMappingItemCollection)objectContext.MetadataWorkspace.GetItemCollection(DataSpace.CSSpace);
+                mappingCollection.GenerateViews(new List<EdmSchemaError>());
+            }
         }
         #endregion
 
