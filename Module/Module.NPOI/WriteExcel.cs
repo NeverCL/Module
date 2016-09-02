@@ -1,5 +1,6 @@
 ﻿using NPOI.HSSF.UserModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -16,8 +17,27 @@ namespace Module.NPOI
 {
     public static class WriteExcel
     {
-        public static string WriteXls<T>(this List<T> data, string fileName, string sheetName = "sheet1")
+        public static string DefaultSheetName = "sheet1";
+
+        #region WriteBulkXls
+        public static HSSFWorkbook WriteBulkXls(params IEnumerable[] dataList)
         {
+            var workbook = new HSSFWorkbook();
+            foreach (var list in dataList)
+            {
+                var type = list.GetType().GenericTypeArguments[0];
+                var sheetName = GetSheetName(type);
+                //BuildExcel<>(list, sheetName, workbook);
+                //todo build
+            }
+            return null;
+        }
+        #endregion
+
+        #region WriteXls
+        public static string WriteXls<T>(this List<T> data, string fileName)
+        {
+            var sheetName = GetSheetName(data.GetType().GenericTypeArguments[0]);
             var workbook = BuildXls(data, sheetName);
             using (var fs = new FileStream(fileName, FileMode.Create))
             {
@@ -26,8 +46,21 @@ namespace Module.NPOI
             return fileName;
         }
 
-        public static string WriteXlsx<T>(this List<T> data, string fileName, string sheetName = "sheet1")
+        private static string GetSheetName(Type type)
         {
+            var nameAttr =
+                      type.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault() as
+                          DisplayNameAttribute;
+            if (nameAttr != null)
+            {
+                return nameAttr.DisplayName;
+            }
+            return DefaultSheetName;
+        }
+
+        public static string WriteXlsx<T>(this List<T> data, string fileName)
+        {
+            var sheetName = GetSheetName(data.GetType().GenericTypeArguments[0]);
             var workbook = BuildXlsx(data, sheetName);
             using (var fs = new FileStream(fileName, FileMode.Create))
             {
@@ -35,6 +68,7 @@ namespace Module.NPOI
             }
             return fileName;
         }
+        #endregion
 
         public static HSSFWorkbook BuildXls<T>(this List<T> data, string sheetName)
         {
@@ -58,7 +92,7 @@ namespace Module.NPOI
             return workbook;
         }
 
-        private static void BuildExcel<T>(List<T> data, string sheetName, IWorkbook workbook)
+        private static void BuildExcel<T>(IList<T> data, string sheetName, IWorkbook workbook)
         {
             var sheet = workbook.CreateSheet(sheetName); //创建工作表
             //1. Write Header
@@ -94,6 +128,11 @@ namespace Module.NPOI
             foreach (var item in headers)
             {
                 var cell = row.CreateCell(item.Id); //在行中添加一列
+                var font = workbook.CreateFont();
+                font.IsBold = true;
+                var style = GetStyle(workbook);
+                style.SetFont(font);
+                cell.CellStyle = style;
                 cell.SetCellValue(headers[item.Id].Name); //设置列的内容
             }
 
@@ -107,6 +146,7 @@ namespace Module.NPOI
                 {
                     var val = itemProps[header.OrderId].GetValue(item);
                     var cell = row.CreateCell(header.Id); //在行中添加一列
+                    cell.CellStyle = GetStyle(workbook);
                     if (!string.IsNullOrEmpty(header.DataFormatString))
                     {
                         val = string.Format("{0:" + header.DataFormatString + "}", val);
@@ -118,6 +158,16 @@ namespace Module.NPOI
                     cell.SetCellValue(val.ToString());
                 }
             }
+        }
+
+        public static ICellStyle GetStyle(IWorkbook xss)
+        {
+            ICellStyle cellstyle = xss.CreateCellStyle();
+            cellstyle.BorderBottom = BorderStyle.Thin;
+            cellstyle.BorderLeft = BorderStyle.Thin;
+            cellstyle.BorderRight = BorderStyle.Thin;
+            cellstyle.BorderTop = BorderStyle.Thin;
+            return cellstyle;
         }
 
         internal class ObjHeader

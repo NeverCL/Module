@@ -31,8 +31,20 @@ namespace Module.NPOI.Tests
             Assert.IsTrue(data.Count == 10);
         }
 
+
+        [TestMethod]
+        public void TestWriteBulkXls()
+        {
+            var data = new List<Model>();
+            for (int i = 0; i < 10; i++)
+            {
+                data.Add(new Model { Name = "测试名称" + i, Id = i, Time = DateTime.Now });
+            }
+            WriteExcel.WriteBulkXls(data, data, data);
+        }
     }
 
+    [DisplayName("sheet名称")]
     public class Model
     {
         [NotMapped]
