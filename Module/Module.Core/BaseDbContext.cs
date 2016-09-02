@@ -34,7 +34,7 @@ namespace Module.Core
         {
         }
 
-        protected static void GenerateViews(DbContext dbContext)
+        public static void GenerateViews(DbContext dbContext)
         {
             using (var db = dbContext)
             {
