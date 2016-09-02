@@ -21,6 +21,16 @@ namespace Module.NPOI.Tests
             }
             data.WriteXls("2.xls");
         }
+
+
+        [TestMethod]
+        public void TestReadExcel()
+        {
+            var data = "2.xls".ReadXls<Model>();
+            Assert.IsNotNull(data);
+            Assert.IsTrue(data.Count == 10);
+        }
+
     }
 
     public class Model
@@ -32,7 +42,7 @@ namespace Module.NPOI.Tests
         public string Name { get; set; }
 
         [DisplayName("创建时间")]
-        [DisplayFormat(DataFormatString = "yyyy年MM月dd")]
+        [DisplayFormat(DataFormatString = "yyyy年MM月dd日")]
         public DateTime Time { get; set; }
     }
 }
