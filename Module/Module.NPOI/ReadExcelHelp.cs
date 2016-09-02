@@ -9,7 +9,7 @@ using NPOI.HSSF.UserModel;
 
 namespace Module.NPOI
 {
-    public static class ReadExcel
+    public static class ReadExcelHelp
     {
         public static List<T> ReadXls<T>(this string fileName) where T : new()
         {
