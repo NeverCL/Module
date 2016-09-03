@@ -1,5 +1,10 @@
 ﻿## 说明
 
+- Nuget安装
+```
+Install-Package Module.NPOI -Pre
+```
+
 - 根据扩展名自动解析使用xls和xlsx
 
 - 支持DataAnnotations
