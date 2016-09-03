@@ -2,7 +2,7 @@
 
 - Nuget安装
 ```
-Install-Package Module.NPOI -Pre
+Install-Package Module.NPOI
 ```
 
 - 根据扩展名自动解析使用xls和xlsx
