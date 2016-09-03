@@ -2,6 +2,27 @@
 
 - 根据扩展名自动解析使用xls和xlsx
 
+- 支持DataAnnotations
+```C#
+    [DisplayName("sheet名称")]
+    public class Model
+    {
+        [NotMapped]
+        public int Id { get; set; }
+
+        [DisplayName("姓名")]
+        public string Name { get; set; }
+
+        [DisplayName("创建时间")]
+        [DisplayFormat(DataFormatString = "yyyy年MM月dd日")]
+        public DateTime Time { get; set; }
+    }
+```
+    - [NotMapped]
+    - [DisplayName("header名称")]
+    - [DisplayName("sheet名称")]
+    - [DisplayFormat(DataFormatString = "yyyy年MM月dd日")]
+
 - 单个sheet导出
 ```C#
 new List<Model>().WriteExcel("2.xls");
@@ -22,9 +43,5 @@ var data = "2.xls".ReadExcel<Model>();
 var dataList = ReadExcelHelp.ReadBulkExcel("3.xls", new List<Model>(), new List<Model>(), new List<Model>());
 ```
 
-- 支持DataAnnotations
-    - [NotMapped]
-    - [DisplayName("header名称")]
-    - [DisplayName("sheet名称")]
-    - [DisplayFormat(DataFormatString = "yyyy年MM月dd日")]
+
 
