@@ -125,11 +125,22 @@ namespace Module.NPOI
                 {
                     var header = new ObjHeader();
 
-                    var nameAttr =
+                    var displayAttr =
+                        prop.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as
+                            DisplayAttribute;
+
+                    if (displayAttr == null)
+                    {
+                        var displayNameAttr =
                         prop.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault() as
                             DisplayNameAttribute;
 
-                    header.Name = nameAttr != null ? nameAttr.DisplayName : prop.Name;
+                        header.Name = displayNameAttr != null ? displayNameAttr.DisplayName : prop.Name;
+                    }
+                    else
+                    {
+                        header.Name = displayAttr.Name;
+                    }
 
                     var formatAttr =
                         prop.GetCustomAttributes(typeof(DisplayFormatAttribute), false).FirstOrDefault() as
@@ -163,7 +174,13 @@ namespace Module.NPOI
                 var itemProps = item.GetType().GetProperties();
                 foreach (var header in headers)
                 {
-                    var val = itemProps[header.OrderId].GetValue(item);
+                    var prop = itemProps[header.OrderId];//prop
+                    var val = prop.GetValue(item);
+                    if (prop.PropertyType.IsEnum)
+                    {
+                        //enum
+                        val = InvokeHelp.InvokeStaticGenericMethod(new[] { val }, typeof(InvokeHelp), "GetEnumName", prop.PropertyType);
+                    }
                     var cell = row.CreateCell(header.Id); //在行中添加一列
                     cell.CellStyle = GetStyle(workbook);
                     if (!string.IsNullOrEmpty(header.DataFormatString))

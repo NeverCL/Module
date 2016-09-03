@@ -14,10 +14,12 @@ namespace Module.NPOI.Tests
         [TestMethod]
         public void TestWriteExcel()
         {
+            var statu = Statu.Active;
+            var str = string.Format("{0:G}", statu);
             var data = new List<Model>();
             for (int i = 0; i < 10; i++)
             {
-                data.Add(new Model { Name = "测试名称" + i, Id = i, Time = DateTime.Now });
+                data.Add(new Model { Name = "测试名称" + i, Id = i, Time = DateTime.Now, Statu = i > 5 ? Statu.Active : Statu.Close });
             }
             data.WriteExcel("2.xls");
         }
@@ -64,8 +66,19 @@ namespace Module.NPOI.Tests
         [DisplayName("姓名")]
         public string Name { get; set; }
 
+        [DisplayName("状态")]
+        public Statu Statu { get; set; }
+
         [DisplayName("创建时间")]
         [DisplayFormat(DataFormatString = "yyyy年MM月dd日")]
         public DateTime Time { get; set; }
+    }
+
+    public enum Statu
+    {
+        [Display(Name = "激活")]
+        Active,
+        [System.ComponentModel.DescriptionAttribute("关闭")]
+        Close
     }
 }

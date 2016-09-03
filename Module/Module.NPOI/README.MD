@@ -11,6 +11,8 @@ Install-Package Module.NPOI -Pre
     - [NotMapped]
     - [DisplayName("header名称")]
     - [DisplayName("sheet名称")]
+    - [Display(Name = "enum名称")]
+	- [System.ComponentModel.DescriptionAttribute("enum名称")]
     - [DisplayFormat(DataFormatString = "yyyy年MM月dd日")]
 
 ```C#
@@ -23,9 +25,20 @@ Install-Package Module.NPOI -Pre
         [DisplayName("姓名")]
         public string Name { get; set; }
 
+		[DisplayName("状态")]
+        public Statu Statu { get; set; }
+
         [DisplayName("创建时间")]
         [DisplayFormat(DataFormatString = "yyyy年MM月dd日")]
         public DateTime Time { get; set; }
+    }
+
+	public enum Statu
+    {
+        [Display(Name = "激活")]
+        Active,
+        [System.ComponentModel.DescriptionAttribute("关闭")]
+        Close
     }
 ```
 

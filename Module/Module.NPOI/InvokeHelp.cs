@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -16,5 +18,26 @@ namespace Module.NPOI
             return miConstructed.Invoke(null, args);
         }
 
+        public static string GetEnumName<T>(object value)
+        {
+            var membs = typeof(T).GetFields();
+            foreach (var item in membs)
+            {
+                if (item.Name == value.ToString())
+                {
+                    var attr = item.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as DisplayAttribute;
+
+                    if (attr != null)
+                        return attr.Name;
+                    else
+                    {
+                        var descAttr = item.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
+                        if (descAttr != null)
+                            return descAttr.Description;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
