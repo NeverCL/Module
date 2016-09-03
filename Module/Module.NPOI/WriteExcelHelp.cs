@@ -42,20 +42,13 @@ namespace Module.NPOI
                 var type = list.GetType().GenericTypeArguments[0];
                 var sheetName = GetSheetName(type);
                 index++;
-                InvokeStaticGenericMethod(new object[] { list, index + "-" + sheetName, workbook }, typeof(WriteExcelHelp), "BuildExcel", type);
+                InvokeHelp.InvokeStaticGenericMethod(new object[] { list, index + "-" + sheetName, workbook }, typeof(WriteExcelHelp), "BuildExcel", type);
             }
             using (var fs = new FileStream(fileName, FileMode.Create))
             {
                 workbook.Write(fs);
             }
             return fileName;
-        }
-
-        static void InvokeStaticGenericMethod(object[] args, Type classType, string methodName, Type genericType)
-        {
-            MethodInfo mi = classType.GetMethod(methodName);
-            MethodInfo miConstructed = mi.MakeGenericMethod(genericType);
-            miConstructed.Invoke(null, args);
         }
         #endregion
 
@@ -118,7 +111,7 @@ namespace Module.NPOI
             return workbook;
         }
 
-        public static void BuildExcel<T>(IList<T> data, string sheetName, IWorkbook workbook)
+        static void BuildExcel<T>(IList<T> data, string sheetName, IWorkbook workbook)
         {
             var sheet = workbook.CreateSheet(sheetName); //创建工作表
             //1. Write Header
@@ -186,7 +179,7 @@ namespace Module.NPOI
             }
         }
 
-        public static ICellStyle GetStyle(IWorkbook xss)
+        static ICellStyle GetStyle(IWorkbook xss)
         {
             ICellStyle cellstyle = xss.CreateCellStyle();
             cellstyle.BorderBottom = BorderStyle.Thin;

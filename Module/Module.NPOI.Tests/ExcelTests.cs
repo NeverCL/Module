@@ -26,7 +26,7 @@ namespace Module.NPOI.Tests
         [TestMethod]
         public void TestReadExcel()
         {
-            var data = "2.xls".ReadXls<Model>();
+            var data = "2.xls".ReadExcel<Model>();
             Assert.IsNotNull(data);
             Assert.IsTrue(data.Count == 10);
         }
@@ -40,7 +40,18 @@ namespace Module.NPOI.Tests
             {
                 data.Add(new Model { Name = "测试名称" + i, Id = i, Time = DateTime.Now });
             }
-            WriteExcelHelp.WriteBulkExcel("3.xls",data, data, data);
+            WriteExcelHelp.WriteBulkExcel("3.xls", data, data, data);
+        }
+
+
+        [TestMethod]
+        public void TestReadBulkExcel()
+        {
+            var dataList = ReadExcelHelp.ReadBulkExcel("3.xls", new List<Model>(), new List<Model>(), new List<Model>());
+            Assert.IsTrue(dataList.Length == 3);
+            var list = dataList[0] as List<Model>;
+            Assert.IsNotNull(list);
+            Assert.AreEqual(list.Count, 10);
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -6,17 +7,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 
 namespace Module.NPOI
 {
     public static class ReadExcelHelp
     {
-        public static List<T> ReadXls<T>(this string fileName) where T : new()
+        public static IEnumerable[] ReadBulkExcel(string fileName, params IEnumerable[] dataList)
+        {
+            for (int i = 0; i < dataList.Length; i++)
+            {
+                //1. 按顺序取sheet
+                //2. 对每个sheet还原
+                var list = dataList[i];
+                var model = InvokeHelp.InvokeStaticGenericMethod(new object[] { fileName, i }, typeof(ReadExcelHelp), "ReadExcel", list.GetType().GenericTypeArguments[0]) as IEnumerable;
+                dataList[i] = model;
+            }
+            return dataList;
+        }
+
+        public static List<T> ReadExcel<T>(this string fileName, int sheetAt = 0) where T : new()
         {
             using (var fs = new FileStream(fileName, FileMode.Open))
             {
-                var workbook = new HSSFWorkbook(fs);
-                var sheet = workbook.GetSheetAt(0);
+                IWorkbook workbook;
+                if (Path.GetExtension(fileName) == ".xls")
+                {
+                    workbook = new HSSFWorkbook(fs);
+                }
+                else if (Path.GetExtension(fileName) == ".xlsx")
+                {
+                    workbook = new XSSFWorkbook(fs);
+                }
+                else
+                {
+                    return null;
+                }
+                var sheet = workbook.GetSheetAt(sheetAt);
                 var row = sheet.GetRow(0);//获取工作表第一行
                 var headers = new List<ExcelHeader>();
                 for (int i = 0; i < row.Cells.Count; i++)
@@ -33,7 +61,7 @@ namespace Module.NPOI
                 }
 
                 var list = new List<T>();
-                for (int i = 1; i <= sheet.LastRowNum ; i++)
+                for (int i = 1; i <= sheet.LastRowNum; i++)
                 {
                     row = sheet.GetRow(i);
                     var obj = new T();
