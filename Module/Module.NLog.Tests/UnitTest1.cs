@@ -11,7 +11,6 @@ namespace Module.NLog.Tests
         [TestMethod]
         public void TestNLog()
         {
-            LogConfig.ConfigureFile();
             var builder = new ContainerBuilder();
 
             // Register individual components
@@ -24,6 +23,7 @@ namespace Module.NLog.Tests
 
             var task = container.Resolve<ITaskRepository>();
 
+            LogConfig.ConfigureFile();
             task.Create();
 
         }
