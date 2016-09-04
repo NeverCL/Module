@@ -5,7 +5,9 @@
 Install-Package Module.NPOI
 ```
 
-- 3w条数据导出1s
+- 3w条数据导出耗时:1s
+
+- 3w条数据序列化耗时:1s
 
 - 根据扩展名自动解析使用xls和xlsx
 

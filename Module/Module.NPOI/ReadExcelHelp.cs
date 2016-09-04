@@ -71,8 +71,17 @@ namespace Module.NPOI
                         if (headers.Any(x => x.TitleId == j))
                         {
                             var prop = typeof(T).GetProperties()[headers.First(x => x.TitleId == j).OrderId];
-                            var newVal = Convert.ChangeType(value, prop.PropertyType);
-                            prop.SetValue(obj, newVal);
+                            if (prop.PropertyType.IsEnum)
+                            {
+                                value = InvokeHelp.InvokeStaticGenericMethod(new[] { value }, typeof(InvokeHelp), "GetEnumValue", prop.PropertyType) as string;
+                                var en = Enum.Parse(prop.PropertyType, value);
+                                prop.SetValue(obj, en);
+                            }
+                            else
+                            {
+                                var newVal = Convert.ChangeType(value, prop.PropertyType);
+                                prop.SetValue(obj, newVal);
+                            }
                         }
                     }
                     list.Add(obj);

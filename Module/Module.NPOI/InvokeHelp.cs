@@ -29,15 +29,41 @@ namespace Module.NPOI
 
                     if (attr != null)
                         return attr.Name;
-                    else
-                    {
-                        var descAttr = item.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
-                        if (descAttr != null)
-                            return descAttr.Description;
-                    }
+                    var descAttr = item.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
+                    if (descAttr != null)
+                        return descAttr.Description;
                 }
             }
             return null;
+        }
+
+        public static string GetEnumValue<T>(string value)
+        {
+            var membs = typeof(T).GetFields();
+            foreach (var item in membs)
+            {
+                var attrName = string.Empty;
+                var attr = item.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as DisplayAttribute;
+
+                if (attr != null)
+                    attrName = attr.Name;
+                else
+                {
+                    var descAttr = item.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
+                    if (descAttr != null)
+                        attrName = descAttr.Description;
+                }
+
+                if (string.IsNullOrEmpty(attrName) && item != membs.First())
+                {
+                    return value;
+                }
+                if (attrName == value)
+                {
+                    return item.Name;
+                }
+            }
+            return "0";
         }
     }
 }
