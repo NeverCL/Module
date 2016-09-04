@@ -115,7 +115,6 @@ namespace Module.NPOI
         public static void BuildExcel<T>(IList<T> data, string sheetName, IWorkbook workbook)
         {
             var sheet = workbook.CreateSheet(sheetName); //创建工作表
-            _cellStyle = GetStyle(workbook);
             //1. Write Header
             var props = typeof(T).GetProperties();
             var headers = new List<ObjHeader>();
@@ -162,12 +161,14 @@ namespace Module.NPOI
                 var cell = row.CreateCell(item.Id); //在行中添加一列
                 var font = workbook.CreateFont();
                 font.IsBold = true;
+                _cellStyle = GetStyle(workbook);
                 var style = _cellStyle;
                 style.SetFont(font);
                 cell.CellStyle = style;
                 cell.SetCellValue(headers[item.Id].Name); //设置列的内容
             }
 
+            _cellStyle = GetStyle(workbook);
             //2. Write Content
             for (int i = 0; i < data.Count; i++)
             {
