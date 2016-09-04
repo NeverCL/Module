@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Castle.DynamicProxy;
 using System.ComponentModel.DataAnnotations;
 using Castle.Core.Internal;
@@ -14,9 +12,9 @@ namespace Module.Application.Validate
     {
         private readonly List<ValidationResult> _validationErrors;
 
-        public ValidateInterceptor(List<ValidationResult> validationErrors)
+        public ValidateInterceptor()
         {
-            _validationErrors = validationErrors;
+            _validationErrors = new List<ValidationResult>();
         }
 
         public void Intercept(IInvocation invocation)
@@ -84,7 +82,7 @@ namespace Module.Application.Validate
 
             if (validatingObject is ICustomValidate)
             {
-                (validatingObject as ICustomValidate).AddValidationErrors(_validationErrors);
+                ((ICustomValidate) validatingObject).AddValidationErrors(_validationErrors);
             }
         }
     }

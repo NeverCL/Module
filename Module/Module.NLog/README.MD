@@ -7,7 +7,7 @@
 Nuget package [available](https://www.nuget.org/packages/Module.NLog), to install run the following command;
 
 ```csharp
-Install-Package Autofac.Extras.NLog
+Install-Package Module.NLog
 ```
 
 **builder.Build()前执行**
