@@ -14,10 +14,8 @@ namespace Module.NPOI.Tests
         [TestMethod]
         public void TestWriteExcel()
         {
-            var statu = Statu.Active;
-            var str = string.Format("{0:G}", statu);
             var data = new List<Model>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 data.Add(new Model { Name = "测试名称" + i, Id = i, Time = DateTime.Now, Statu = i > 5 ? Statu.Active : Statu.Close });
             }
@@ -38,7 +36,7 @@ namespace Module.NPOI.Tests
         public void TestWriteBulkXls()
         {
             var data = new List<Model>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 data.Add(new Model { Name = "测试名称" + i, Id = i, Time = DateTime.Now });
             }

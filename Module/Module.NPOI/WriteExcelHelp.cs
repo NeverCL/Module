@@ -19,6 +19,7 @@ namespace Module.NPOI
     public static class WriteExcelHelp
     {
         public static string DefaultSheetName = "sheet1";
+        private static ICellStyle _cellStyle;
 
         #region WriteBulkXls
         public static string WriteBulkExcel(string fileName, params IEnumerable[] dataList)
@@ -111,9 +112,10 @@ namespace Module.NPOI
             return workbook;
         }
 
-        static void BuildExcel<T>(IList<T> data, string sheetName, IWorkbook workbook)
+        public static void BuildExcel<T>(IList<T> data, string sheetName, IWorkbook workbook)
         {
             var sheet = workbook.CreateSheet(sheetName); //创建工作表
+            _cellStyle = GetStyle(workbook);
             //1. Write Header
             var props = typeof(T).GetProperties();
             var headers = new List<ObjHeader>();
@@ -160,7 +162,7 @@ namespace Module.NPOI
                 var cell = row.CreateCell(item.Id); //在行中添加一列
                 var font = workbook.CreateFont();
                 font.IsBold = true;
-                var style = GetStyle(workbook);
+                var style = _cellStyle;
                 style.SetFont(font);
                 cell.CellStyle = style;
                 cell.SetCellValue(headers[item.Id].Name); //设置列的内容
@@ -182,7 +184,7 @@ namespace Module.NPOI
                         val = InvokeHelp.InvokeStaticGenericMethod(new[] { val }, typeof(InvokeHelp), "GetEnumName", prop.PropertyType);
                     }
                     var cell = row.CreateCell(header.Id); //在行中添加一列
-                    cell.CellStyle = GetStyle(workbook);
+                    cell.CellStyle = _cellStyle;
                     if (!string.IsNullOrEmpty(header.DataFormatString))
                     {
                         val = string.Format("{0:" + header.DataFormatString + "}", val);

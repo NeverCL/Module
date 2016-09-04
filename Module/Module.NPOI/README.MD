@@ -5,6 +5,8 @@
 Install-Package Module.NPOI
 ```
 
+- 3w条数据导出1s
+
 - 根据扩展名自动解析使用xls和xlsx
 
 - 支持DataAnnotations
