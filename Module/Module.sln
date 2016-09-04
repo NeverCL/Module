@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.NPOI", "Module.NPOI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.NPOI.Tests", "Module.NPOI.Tests\Module.NPOI.Tests.csproj", "{F4C0BDF1-E604-469A-B988-BEF018D91ECD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.RuoKuai", "Module.RuoKuai\Module.RuoKuai.csproj", "{CEBF2A6E-F7C4-4005-B9E7-9AE303F9BFCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.RuoKuai.Tests", "Module.RuoKuai.Tests\Module.RuoKuai.Tests.csproj", "{7357D539-5994-41E8-B20E-E3B5CAF4FB8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +75,14 @@ Global
 		{F4C0BDF1-E604-469A-B988-BEF018D91ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4C0BDF1-E604-469A-B988-BEF018D91ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4C0BDF1-E604-469A-B988-BEF018D91ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEBF2A6E-F7C4-4005-B9E7-9AE303F9BFCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEBF2A6E-F7C4-4005-B9E7-9AE303F9BFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEBF2A6E-F7C4-4005-B9E7-9AE303F9BFCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEBF2A6E-F7C4-4005-B9E7-9AE303F9BFCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7357D539-5994-41E8-B20E-E3B5CAF4FB8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7357D539-5994-41E8-B20E-E3B5CAF4FB8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7357D539-5994-41E8-B20E-E3B5CAF4FB8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7357D539-5994-41E8-B20E-E3B5CAF4FB8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,5 +90,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2CC9953C-E0F8-4380-B5DC-481F3EAC3072} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 		{F4C0BDF1-E604-469A-B988-BEF018D91ECD} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
+		{7357D539-5994-41E8-B20E-E3B5CAF4FB8C} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 	EndGlobalSection
 EndGlobal
