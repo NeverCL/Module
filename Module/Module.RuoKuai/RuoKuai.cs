@@ -74,10 +74,16 @@ namespace Module.RuoKuai
         {
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(rst)))
             {
-                var xml = new XmlSerializer(typeof(RuoKuaiRst)).Deserialize(ms) as RuoKuaiRst;
-                if (xml != null) return xml.Result;
+                try
+                {
+                    var xml = new XmlSerializer(typeof(RuoKuaiRst)).Deserialize(ms) as RuoKuaiRst;
+                    return xml != null ? xml.Result : rst;
+                }
+                catch (Exception)
+                {
+                    return rst;
+                }
             }
-            return rst;
         }
 
         public string Verify(string imgUrl)
