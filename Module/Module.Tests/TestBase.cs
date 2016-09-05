@@ -11,19 +11,25 @@ namespace Module.Tests
     {
         protected IContainer Container { get; set; }
 
-        public TestBase(params Type[] types) : this(null, types)
+
+        public TestBase(params Type[] types) : this(new ContainerBuilder(), null, types)
+        {
+
+        }
+
+        public TestBase(ContainerBuilder builder, params Type[] types) : this(builder, null, types)
         {
 
         }
 
         /// <summary>
-        /// 
+        /// 指定Type开启ValidateInterceptor
         /// </summary>
-        /// <param name="interceptTypes">指定Type开启ValidateInterceptor</param>
+        /// <param name="builder"></param>
+        /// <param name="interceptTypes"></param>
         /// <param name="types"></param>
-        public TestBase(int[] interceptTypes, params Type[] types)
+        public TestBase(ContainerBuilder builder, int[] interceptTypes, params Type[] types)
         {
-            var builder = new ContainerBuilder();
             for (var i = 0; i < types.Length; i++)
             {
                 var type = types[i];
@@ -36,8 +42,13 @@ namespace Module.Tests
                     builder.RegisterAssemblyTypes(type.Assembly).AsImplementedInterfaces().AsSelf();
                 }
             }
+            if (interceptTypes != null)
+            {
+                builder.RegisterType<ValidateInterceptor>();
+            }
             Container = builder.Build();
         }
+
 
         protected virtual T GetService<T>()
         {
