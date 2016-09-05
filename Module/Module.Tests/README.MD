@@ -9,6 +9,8 @@ https://effort.codeplex.com/wikipage?title=Create%20a%20fake%20DbContext%20insta
 
 - module.core
 
+- module.application
+
 - module.application.validate
 
 
