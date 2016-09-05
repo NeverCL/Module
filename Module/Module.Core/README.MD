@@ -4,7 +4,7 @@ Nuget:Install-Package Module.Core -version 1.0
 
 ## 功能
 
-- 3种BaseDbContext
+- 4种BaseDbContext
 - 各种AuditEntity
 
 ## 类
@@ -20,6 +20,9 @@ Nuget:Install-Package Module.Core -version 1.0
 
 - BaseReleaseDbContext
 	- 正式环境下使用Migration 防止数据误删除
+
+- ZeroBaseDbContext
+	- 支持IdentityEF
 
 - BaseEntity : BaseEntity<T> : IEntity<T>
 	- Id
