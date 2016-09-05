@@ -39,7 +39,7 @@ namespace Module.Tests
             Container = builder.Build();
         }
 
-        protected T GetService<T>()
+        protected virtual T GetService<T>()
         {
             return Container.Resolve<T>();
         }
