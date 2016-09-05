@@ -47,7 +47,7 @@ namespace Module.Core
                 var mappingCollection = (StorageMappingItemCollection)objectContext.MetadataWorkspace.GetItemCollection(DataSpace.CSSpace);
                 mappingCollection.GenerateViews(new List<EdmSchemaError>());
             }
-        } 
+        }
         #endregion
 
         #region SaveChanges
@@ -171,6 +171,26 @@ namespace Module.Core
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder);
+        }
+        #endregion
+    }
+
+    public class ZeroBaseDbContext : ZeroBaseDbContext<ZeroUser, ZeroRole>
+    {
+        #region ctor
+        protected ZeroBaseDbContext()
+    : this("DefaultConnection")
+        {
+
+        }
+
+        protected ZeroBaseDbContext(DbConnection connection) : base(connection)
+        {
+        }
+
+        protected ZeroBaseDbContext(string connStr)
+            : base(connStr)
+        {
         }
         #endregion
     }

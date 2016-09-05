@@ -4,16 +4,17 @@ using System.Data.Entity;
 using System.Linq;
 using System;
 using System.Data.Entity.Infrastructure;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Module.Core.Tests
 {
     public class BaseDbContextTests
     {
-        static BaseDbContextTests()
-        {
-            Database.DefaultConnectionFactory = new OfflineProviderFactory();
+        //static BaseDbContextTests()
+        //{
+        //    Database.DefaultConnectionFactory = new OfflineProviderFactory();
 
-        }
+        //}
         public class OfflineProviderFactory : IDbConnectionFactory
         {
             public DbConnection CreateConnection(string nameOrConnectionString)
@@ -26,7 +27,7 @@ namespace Module.Core.Tests
         public void TestAudit()
         {
             DbConnection connection = Effort.DbConnectionFactory.CreateTransient();
-            using (var db = new BaseAppDb(connection))
+            using (var db = new AppDb(connection))
             {
                 //create
                 db.Users.Add(new User
@@ -54,38 +55,30 @@ namespace Module.Core.Tests
         }
 
         [Fact]
-        public void TestDevDb()
+        public void TestZeroDb()
         {
-            using (var db = new BaseDevAppDb())
+            DbConnection connection = Effort.DbConnectionFactory.CreateTransient();
+            using (var db = new ZeroDb(connection))
             {
-                db.Users.Add(new User {Name = "admin"});
+                db.Users.Add(new ZeroUser {DisplayName = "系统管理员", UserName = "admin"});
                 db.SaveChanges();
-                var user = db.Users.Single(x => x.Id == 1);
-                Assert.True(user != null);
-                Assert.True(user.CreateTime.Date == DateTime.Now.Date);
+                var user = db.Users.Single(x => x.UserName == "admin");
+                Assert.NotNull(user);
             }
         }
     }
 
-
-    public class BaseDevAppDb : BaseDevDbContext<BaseDevAppDb>
+    public class ZeroDb : ZeroBaseDbContext
     {
-        public BaseDevAppDb()
-        {
-
-        }
-
-        public BaseDevAppDb(DbConnection connection) : base(connection)
+        public ZeroDb(DbConnection connection) : base(connection)
         {
         }
-
-        public DbSet<User> Users { get; set; }
     }
 
 
-    public class BaseAppDb : BaseDbContext
+    public class AppDb : BaseDbContext
     {
-        public BaseAppDb(DbConnection connection) : base(connection)
+        public AppDb(DbConnection connection) : base(connection)
         {
         }
 
