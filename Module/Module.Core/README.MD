@@ -4,7 +4,7 @@ Nuget:Install-Package Module.Core -version 1.0
 
 ## 功能
 
-- 4种BaseDbContext
+- 2种BaseDbContext
 - 各种AuditEntity
 
 ## 类
