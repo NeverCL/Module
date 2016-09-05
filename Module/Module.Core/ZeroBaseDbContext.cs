@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Mapping;
 using System.Data.Entity.Core.Metadata.Edm;
@@ -13,27 +12,33 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Common;
 
 namespace Module.Core
 {
-    public abstract class BaseDbContext : DbContext
+    public class ZeroBaseDbContext<TUser, TRole> : IdentityDbContext<TUser, TRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
+        where TUser : IdentityUser<string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
+        where TRole : IdentityRole<string, IdentityUserRole>
     {
         #region ctor
-        protected BaseDbContext()
+        protected ZeroBaseDbContext()
     : this("DefaultConnection")
         {
 
         }
 
-        protected BaseDbContext(DbConnection connection) : base(connection, true)
+        protected ZeroBaseDbContext(DbConnection connection) : base(connection, true)
         {
         }
 
-        protected BaseDbContext(string connStr)
+        protected ZeroBaseDbContext(string connStr)
             : base(connStr)
         {
         }
+        #endregion
 
+        #region GenerateViews
         protected static void GenerateViews(DbContext db)
         {
             using (db)
@@ -84,6 +89,9 @@ namespace Module.Core
                 LogDbEntityValidationException(ex);
                 throw;
             }
+        }
+        private void LogDbEntityValidationException(DbEntityValidationException dbEntityValidationException)
+        {
         }
         #endregion
 
@@ -162,13 +170,27 @@ namespace Module.Core
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            base.OnModelCreating(modelBuilder);
         }
         #endregion
+    }
 
-        #region Log
-        private void LogDbEntityValidationException(DbEntityValidationException dbEntityValidationException)
+    public class ZeroBaseDbContext : ZeroBaseDbContext<ZeroUser, ZeroRole>
+    {
+        #region ctor
+        protected ZeroBaseDbContext()
+    : this("DefaultConnection")
         {
-            //todo log
+
+        }
+
+        protected ZeroBaseDbContext(DbConnection connection) : base(connection)
+        {
+        }
+
+        protected ZeroBaseDbContext(string connStr)
+            : base(connStr)
+        {
         }
         #endregion
     }

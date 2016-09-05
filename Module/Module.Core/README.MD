@@ -4,7 +4,7 @@ Nuget:Install-Package Module.Core -version 1.0
 
 ## 功能
 
-- 3种BaseDbContext
+- 2种BaseDbContext
 - 各种AuditEntity
 
 ## 类
@@ -15,11 +15,8 @@ Nuget:Install-Package Module.Core -version 1.0
 	- 去除级联删除
 	- 日志(todo)
 
-- BaseDevDbContext
-	- 开发环境下免除改表加Migration过程
-
-- BaseReleaseDbContext
-	- 正式环境下使用Migration 防止数据误删除
+- ZeroBaseDbContext
+	- 支持IdentityEF
 
 - BaseEntity : BaseEntity<T> : IEntity<T>
 	- Id
