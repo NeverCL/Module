@@ -69,6 +69,7 @@
     <Content Include="Content\side-menu.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\ui-view.css" />
+    <Content Include="Images\favicon.ico" />
     <Content Include="index.html" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\controller\homeCtrl.js" />
@@ -89,9 +90,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
