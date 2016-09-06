@@ -71,7 +71,6 @@
     <Content Include="Content\ui-view.css" />
     <Content Include="Images\favicon.ico" />
     <Content Include="index.html" />
-    <Content Include="Log\README.MD" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\cfg.js" />
     <Content Include="Scripts\controller\homeCtrl.js" />
@@ -94,6 +93,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Log\" />
     <Folder Include="Scripts\module\" />
   </ItemGroup>
   <PropertyGroup>
