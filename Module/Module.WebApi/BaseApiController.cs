@@ -12,6 +12,8 @@ namespace Module.WebApi
     [NotImplExceptionFilter]
     public abstract class BaseApiController : ApiController
     {
+
+
         public string GetUserId()
         {
             return User.Identity.GetUserId();
