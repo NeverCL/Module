@@ -7,7 +7,7 @@
     },
     shim: {
         uiRoute: ['lang'],
-        lang: ['angular'],
+        lang: ['angular', 'cfg'],
         ngAnimate: ['lang']
     }
 });

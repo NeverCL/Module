@@ -5,12 +5,12 @@
     },
     shim: {
         metisMenu: ['bootstrap'],
-        bootstrap: ['jquery']
+        bootstrap: ['jquery', 'cfg']
     }
 });
 
 require(['css!../content/bootstrap.min', 'css!../Content/metisMenu.min', 'css!../content/font-awesome.min', 'css!../content/site'
-, 'metisMenu'], function () {
+, 'metisMenu', 'plugins/bs-btn-alert', 'plugins/bs-btn-modal'], function () {
     $('#side-menu').metisMenu();
 });
 
