@@ -69,6 +69,7 @@
     <Content Include="Content\side-menu.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\ui-view.css" />
+    <Content Include="index.html" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\controller\homeCtrl.js" />
     <Content Include="Scripts\i18n\angular-locale_zh-cn.js" />
