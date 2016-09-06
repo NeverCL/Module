@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Core", "Module.Core\Module.Core.csproj", "{610D7FBC-1F2D-436C-81EB-695EC15E15E5}"
 EndProject
@@ -32,6 +32,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.NLog.Tests", "Module.NLog.Tests\Module.NLog.Tests.csproj", "{444282D5-C986-48B6-8B04-5553F7B0DE15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Application.Validate.Tests", "Module.Application.Validate.Tests\Module.Application.Validate.Tests.csproj", "{4238B641-7BD7-44BA-B870-F531339E0A9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Tests.Tests", "Module.Tests.Tests\Module.Tests.Tests.csproj", "{976ECE0C-1628-486D-93C1-16D30A072FB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{4238B641-7BD7-44BA-B870-F531339E0A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4238B641-7BD7-44BA-B870-F531339E0A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4238B641-7BD7-44BA-B870-F531339E0A9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{976ECE0C-1628-486D-93C1-16D30A072FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{976ECE0C-1628-486D-93C1-16D30A072FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{976ECE0C-1628-486D-93C1-16D30A072FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{976ECE0C-1628-486D-93C1-16D30A072FB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,5 +111,6 @@ Global
 		{7357D539-5994-41E8-B20E-E3B5CAF4FB8C} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 		{444282D5-C986-48B6-8B04-5553F7B0DE15} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 		{4238B641-7BD7-44BA-B870-F531339E0A9C} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
+		{976ECE0C-1628-486D-93C1-16D30A072FB1} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 	EndGlobalSection
 EndGlobal

@@ -22,6 +22,11 @@ namespace Module.Tests
 
         }
 
+        public TestBase(int[] interceptTypes, params Type[] types) : this(new ContainerBuilder(), interceptTypes, types)
+        {
+
+        }   
+
         /// <summary>
         /// 指定Type开启ValidateInterceptor
         /// </summary>
