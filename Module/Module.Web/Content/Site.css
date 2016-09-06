@@ -1,0 +1,8 @@
+﻿@import url('ui-view.css');
+@import url('side-menu.css');
+
+* {
+    font-family: '微软雅黑';
+    margin: 0;
+    padding: 0;
+}

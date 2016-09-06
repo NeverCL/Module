@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>XX系统-后台管理</title>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="images/x-icon" href="../Images/favicon.ico">
+    <script data-main="../Scripts/main" src="../Scripts/require.js" defer async="true"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">XX系统-后台管理</a>
+            </div>
+            <p class="navbar-text pull-right">
+                <a href="/Account/Login">登录</a>
+            </p>
+        </div>
+    </nav>
+    <div class="menu">
+        <div class="side-nav">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-home"></i>首页模块
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-child">
+                        <li>
+                            <a ui-sref="home">
+                                <i class="fa fa-bar-chart-o"></i>总览
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content container-fluid" ui-view></div>
+    <div modal></div>
+</body>
+
+</html>

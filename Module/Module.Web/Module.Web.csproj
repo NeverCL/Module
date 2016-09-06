@@ -64,6 +64,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\home.html" />
+    <Content Include="Admin\index.html" />
+    <Content Include="Content\side-menu.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\ui-view.css" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\controller\homeCtrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-cn.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Upload\README.MD" />
+    <Content Include="Log\README.MD" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -77,7 +88,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
