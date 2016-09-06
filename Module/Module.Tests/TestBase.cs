@@ -11,21 +11,25 @@ namespace Module.Tests
     {
         protected IContainer Container { get; set; }
 
-
-        public TestBase(params Type[] types) : this(new ContainerBuilder(), null, types)
+        protected TestBase()
         {
 
         }
 
-        public TestBase(ContainerBuilder builder, params Type[] types) : this(builder, null, types)
+        protected TestBase(params Type[] types) : this(new ContainerBuilder(), null, types)
         {
 
         }
 
-        public TestBase(int[] interceptTypes, params Type[] types) : this(new ContainerBuilder(), interceptTypes, types)
+        protected TestBase(ContainerBuilder builder, params Type[] types) : this(builder, null, types)
         {
 
-        }   
+        }
+
+        protected TestBase(int[] interceptTypes, params Type[] types) : this(new ContainerBuilder(), interceptTypes, types)
+        {
+
+        }
 
         /// <summary>
         /// 指定Type开启ValidateInterceptor
