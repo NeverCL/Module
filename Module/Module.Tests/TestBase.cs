@@ -44,7 +44,8 @@ namespace Module.Tests
                 var type = types[i];
                 if (interceptTypes != null && interceptTypes.Contains(i))
                 {
-                    builder.RegisterAssemblyTypes(type.Assembly).AsImplementedInterfaces().AsSelf().EnableInterfaceInterceptors().InterceptedBy(typeof(ValidateInterceptor));
+                    //注意:此处不能调用AsSelf() 否则无法resolve
+                    builder.RegisterAssemblyTypes(type.Assembly).AsImplementedInterfaces().EnableInterfaceInterceptors().InterceptedBy(typeof(ValidateInterceptor));
                 }
                 else
                 {
