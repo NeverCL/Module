@@ -3,6 +3,7 @@
         define(['angular', 'datepicker'], factory);
     } else factory();
 }(window, function () {
+    'use strict';
     angular.module('ng.bs.pager', []).constant('pagerCfg', {
         size: 10,
         index: 1,
@@ -36,7 +37,7 @@
                  '<span ng-bind="item.value"></span>' +
                  '</a>' +
                  '</li>' +
-                 '<li ng-click="actionLi(index - 0 + 1)" ng-class="{disabled:index>=total}" ng-hide="count==0">' +
+                 '<li ng-click="actionLi(index-0+1)" ng-class="{disabled:index>=total}" ng-hide="count==0">' +
                  '<a>' +
                  '<span ng-bind="nextText"></span>' +
                  '</a>' +

@@ -5,6 +5,7 @@
         });
     } else factory(root.jQuery);
 }(window, function ($) {
+    'use strict';
     angular.module('ng.bs.datepicker', []).constant('datepickerCfg', {
         "locale": {
             "format": "YYYY-MM-DD",
