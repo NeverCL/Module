@@ -33,6 +33,15 @@ namespace Module.NPOI.Tests
 
 
         [TestMethod]
+        public void TestReadExcelOrder()
+        {
+            var data = "2.xls".ReadExcelOrder<Model>();
+            Assert.IsNotNull(data);
+            Assert.IsTrue(data.Count == 30000);
+        }
+
+
+        [TestMethod]
         public void TestWriteBulkXls()
         {
             var data = new List<Model>();
@@ -58,9 +67,6 @@ namespace Module.NPOI.Tests
     [DisplayName("sheet名称")]
     public class Model
     {
-        [NotMapped]
-        public int Id { get; set; }
-
         [DisplayName("姓名")]
         public string Name { get; set; }
 
@@ -70,6 +76,9 @@ namespace Module.NPOI.Tests
         [DisplayName("创建时间")]
         [DisplayFormat(DataFormatString = "yyyy年MM月dd日")]
         public DateTime Time { get; set; }
+
+        [NotMapped]
+        public int Id { get; set; }
     }
 
     public enum Statu
