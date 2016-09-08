@@ -1,4 +1,12 @@
-﻿define(['angular', 'jquery'], function () {
+﻿(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery', 'angular', 'datepicker'], function (jquery) {
+            factory(jquery);
+        });
+    } else {
+        factory(root.jQuery);
+    }
+}(window, function ($) {
     angular.module('ng.bs.datepicker', []).constant('datepickerCfg', {
         "locale": {
             "format": "YYYY-MM-DD HH:mm",
@@ -49,9 +57,7 @@
                 opt.locale.format = scope.format;
             if (scope.single === 'false')
                 opt.singleDatePicker = false;
-            picker.daterangepicker(opt, function (start, end, label) {
-
-            });
+            picker.daterangepicker(opt);
         }
     }]);
-});
+}));
