@@ -76,6 +76,7 @@
     <Content Include="Scripts\controller\homeCtrl.js" />
     <Content Include="Scripts\i18n\angular-locale_zh-cn.js" />
     <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\modules\angular-pager.js" />
     <Content Include="Scripts\plugins\bs-btn-alert.js" />
     <Content Include="Scripts\plugins\bs-btn-modal.js" />
     <Content Include="Upload\README.MD" />
@@ -94,7 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Log\" />
-    <Folder Include="Scripts\module\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
