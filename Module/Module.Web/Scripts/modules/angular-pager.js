@@ -1,4 +1,8 @@
-﻿define(['angular'], function () {
+﻿(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['angular', 'datepicker'], factory);
+    } else factory();
+}(window, function () {
     angular.module('ng.bs.pager', []).constant('pagerCfg', {
         size: 10,
         index: 1,
@@ -86,4 +90,4 @@
             scope.pages = pages;
         }
     }]);
-});
+}))
