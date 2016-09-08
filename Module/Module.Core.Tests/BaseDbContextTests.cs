@@ -64,6 +64,12 @@ namespace Module.Core.Tests
                 db.SaveChanges();
                 var user = db.Users.Single(x => x.UserName == "admin");
                 Assert.NotNull(user);
+
+                db.Users.Remove(user);
+                db.SaveChanges();
+                user = db.Users.Single(x => x.UserName == "admin");
+                Assert.NotNull(user);
+                Assert.True(user.DeletionTime.Value.Date == DateTime.Now.Date);
             }
         }
     }
