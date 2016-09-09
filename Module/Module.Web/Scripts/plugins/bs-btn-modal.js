@@ -1,4 +1,9 @@
-﻿define(['jquery'], function ($) {
+﻿(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else factory();
+}(window, function ($) {
+    'use strict';
     function BtnModal(opt) {
         this.opt = opt;
         this.$modal = {};
@@ -48,4 +53,4 @@
         new BtnModal($(e.target).data()).show();
         return false;
     });
-});
+}));

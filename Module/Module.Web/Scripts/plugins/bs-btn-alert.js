@@ -1,4 +1,9 @@
-﻿define(['jquery'], function ($) {
+﻿(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else factory();
+}(window, function ($) {
+    //'use strict';
     function DelModal(opt) {
         this.opt = opt;
         this.$modal = {};
@@ -12,7 +17,7 @@
             host: cfg.host
         },
         init: function () {
-            opt = $.extend(this.defaults, this.opt);
+            var opt = $.extend(this.defaults, this.opt);
             var modal = $('<div class="modal fade" style="margin-top: 10%;"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-body">' + opt.msg + '</div><div class="modal-footer"><a data-dismiss="modal" class="btn btn-default btn-sm">取消</a><button class="btn btn-primary btn-sm">确认</button></div></div></div></div>');
             modal.appendTo($('body'));
             this.$modal = modal;
@@ -46,4 +51,4 @@
         new DelModal($(e.target).data()).show();
         return false;
     });
-});
+}));
