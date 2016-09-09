@@ -43,7 +43,7 @@ namespace Module.NPOI
                 var type = list.GetType().GenericTypeArguments[0];
                 var sheetName = GetSheetName(type);
                 index++;
-                InvokeHelp.InvokeStaticGenericMethod(new object[] { list, index + "-" + sheetName, workbook }, typeof(WriteExcelHelp), "BuildExcel", type);
+                InvokeHelp.InvokeGenericMethod(new object[] { list, index + "-" + sheetName, workbook }, typeof(WriteExcelHelp), "BuildExcel", type);
             }
             using (var fs = new FileStream(fileName, FileMode.Create))
             {
@@ -182,7 +182,7 @@ namespace Module.NPOI
                     if (prop.PropertyType.IsEnum)
                     {
                         //enum
-                        val = InvokeHelp.InvokeStaticGenericMethod(new[] { val }, typeof(InvokeHelp), "GetEnumName", prop.PropertyType);
+                        val = InvokeHelp.InvokeGenericMethod(new[] { val }, typeof(InvokeHelp), "GetEnumName", prop.PropertyType);
                     }
                     var cell = row.CreateCell(header.Id); //在行中添加一列
                     cell.CellStyle = _cellStyle;

@@ -26,7 +26,7 @@ namespace Module.NPOI
                 //1. 按顺序取sheet
                 //2. 对每个sheet还原
                 var list = dataList[i];
-                var model = InvokeHelp.InvokeStaticGenericMethod(new object[] { fileName, i }, typeof(ReadExcelHelp), "ReadExcel", list.GetType().GenericTypeArguments[0]) as IEnumerable;
+                var model = InvokeHelp.InvokeGenericMethod(new object[] { fileName, i }, typeof(ReadExcelHelp), "ReadExcel", list.GetType().GenericTypeArguments[0]) as IEnumerable;
                 dataList[i] = model;
             }
             return dataList;
@@ -69,7 +69,7 @@ namespace Module.NPOI
                         var prop = typeof(T).GetProperties()[j];
                         if (prop.PropertyType.IsEnum)
                         {
-                            value = InvokeHelp.InvokeStaticGenericMethod(new[] { value }, typeof(InvokeHelp), "GetEnumValue", prop.PropertyType) as string;
+                            value = InvokeHelp.InvokeGenericMethod(new[] { value }, typeof(InvokeHelp), "GetEnumValue", prop.PropertyType) as string;
                             var en = Enum.Parse(prop.PropertyType, value);
                             prop.SetValue(obj, en);
                         }
@@ -131,7 +131,7 @@ namespace Module.NPOI
                             var prop = typeof(T).GetProperties()[headers.First(x => x.TitleId == j).OrderId];
                             if (prop.PropertyType.IsEnum)
                             {
-                                value = InvokeHelp.InvokeStaticGenericMethod(new[] { value }, typeof(InvokeHelp), "GetEnumValue", prop.PropertyType) as string;
+                                value = InvokeHelp.InvokeGenericMethod(new[] { value }, typeof(InvokeHelp), "GetEnumValue", prop.PropertyType) as string;
                                 var en = Enum.Parse(prop.PropertyType, value);
                                 prop.SetValue(obj, en);
                             }
