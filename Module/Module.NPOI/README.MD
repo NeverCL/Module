@@ -1,4 +1,13 @@
-﻿## 说明
+﻿## TODO
+- ReadExcel 支持 FileStream方式等
+
+- ReadExcel 支持 NotMapper
+
+- 代码重构
+
+
+
+## 说明
 
 - Nuget安装
 ```
