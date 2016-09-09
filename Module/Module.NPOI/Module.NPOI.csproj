@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="InvokeHelp.cs" />
     <Compile Include="ReadExcelHelp.cs" />
+    <Compile Include="ReadExcel.cs" />
     <Compile Include="WriteExcelHelp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
