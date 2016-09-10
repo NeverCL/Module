@@ -68,6 +68,7 @@
     <Compile Include="WriteExcel.cs" />
     <Compile Include="WriteExcelHelp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WriteExcelLinq.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

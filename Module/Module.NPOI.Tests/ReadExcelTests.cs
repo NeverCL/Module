@@ -1,45 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Module.NPOI.Tests
 {
-    [TestClass]
     public class ReadExcelTests
     {
-        private readonly string _fileName = Guid.NewGuid().ToString() + ".xls";
+        private readonly string _fileName = Guid.NewGuid() + ".xls";
+        private readonly int _count = 10000;
 
         public ReadExcelTests()
         {
-            //todo write
+            var list = new List<Model>();
+            for (int i = 0; i < _count; i++)
+            {
+                list.Add(new Model { Name = "add", Id = i, Time = DateTime.Now, Statu = i % 2 == 0 ? Statu.Active : Statu.Close });
+            }
+            list.WriteTo(_fileName);
         }
 
-        [TestMethod]
-        public void ReadToByString()
-        {
-            var list = _fileName.ReadTo<Model>(true);
-            Assert.IsTrue(list.Count == 30000);
-        }
-
-        [TestMethod]
+        [Fact]
         public void ReadToByFileStream()
         {
             var list = new FileStream(_fileName, FileMode.Open).ReadTo<Model>(true);
-            Assert.IsTrue(list.Count == 30000);
+            Assert.True(list.Count == _count);
         }
 
-        [TestMethod]
+        [Fact]
+        public void ReadToByString()
+        {
+            var list = _fileName.ReadTo<Model>(true);
+            Assert.True(list.Count == _count);
+        }
+
+        [Fact]
         public void ReadToByStream()
         {
             var list = new MemoryStream(File.ReadAllBytes(_fileName)).ReadTo<Model>(true, true);
-            Assert.IsTrue(list.Count == 30000);
+            Assert.True(list.Count == _count);
+        }
+
+        /// <summary>
+        /// 与原来的比较
+        /// </summary>
+        [Fact]
+        public void ReadOld()
+        {
+            var list = _fileName.ReadExcelOrder<Model>();
+            Assert.True(list.Count == _count);
         }
     }
 

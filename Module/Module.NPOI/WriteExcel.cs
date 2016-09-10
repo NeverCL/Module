@@ -43,17 +43,17 @@ namespace Module.NPOI
                     Property = propertyInfo,
                     Title = typeName,
                     TitleOrderId = row.Cells.Count,
-                    Format = (propertyInfo.GetCustomAttributes(typeof(DisplayFormatAttribute), false).First() as DisplayFormatAttribute)?.DataFormatString
+                    Format = (propertyInfo.GetCustomAttributes(typeof(DisplayFormatAttribute), false).FirstOrDefault() as DisplayFormatAttribute)?.DataFormatString
                 });
                 var cell = row.CreateCell(row.Cells.Count);
                 cell.CellStyle = headerCellStyle;
-                cell.SetCellValue(typeName);
+                cell.SetCellValue(string.IsNullOrEmpty(typeName)?propertyInfo.PropertyType.Name: typeName);
             }
 
             //content
             for (var i = 0; i < data.Count; i++)
             {
-                row = sheet.CreateRow(i);
+                row = sheet.CreateRow(i + 1);
                 var item = data[i];
                 foreach (var header in headers)
                 {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -43,26 +44,50 @@ namespace Module.NPOI
                 var workbook = isXls
                         ? (IWorkbook)new HSSFWorkbook(fs) : new XSSFWorkbook(fs);
                 var sheet = workbook.GetSheetAt(sheetAt);
-                var headers = sheet.GetRow(0).Cells.Select(x => new HeaderInfo
+                //headers
+                var cells = sheet.GetRow(0).Cells;
+                var headers = new List<HeaderInfo>();
+                var type = typeof(T);
+                var props = type.GetProperties();
+                for (int i = 0; i < cells.Count; i++)
                 {
-                    Title = x.ToString(),
-                    TitleOrderId = x.ColumnIndex,
-                    PropOrderId = GetPropOrderId<T>(x.ToString())
-                }).ToList();
+                    var cell = cells[i];
+                    if (_isOrderNum && i < props.Length)
+                    {
+                        var prop = props[i];
+                        headers.Add(new HeaderInfo
+                        {
+                            Title = cell.ToString(),
+                            TitleOrderId = i,
+                            Property = prop
+                        });
+                    }
+                    else
+                    {
+                        var prop = GetPropByName(props, cell.ToString());
+                        if (prop != null)
+                        {
+                            headers.Add(new HeaderInfo
+                            {
+                                Title = cell.ToString(),
+                                TitleOrderId = i,
+                                Property = prop
+                            });
+                        }
+                    }
+                }
+
+                //content
                 var list = new List<T>();
                 for (int i = 1; i <= sheet.LastRowNum; i++)
                 {
                     var row = sheet.GetRow(i);
                     var obj = new T();
-                    row.Cells.ForEach(x =>
+                    foreach (var headerInfo in headers)
                     {
-                        PropertyInfo prop;
-                        if (_isOrderNum)
-                            prop = typeof(T).GetProperties()[x.ColumnIndex];
-                        else
-                            prop = typeof(T).GetProperties()[headers.First(y => y.TitleOrderId == x.ColumnIndex).PropOrderId];
-                        SetPropValue(obj, prop, x.ToString());
-                    });
+                        var prop = headerInfo.Property;
+                        SetPropValue(obj, prop, row.Cells[headerInfo.TitleOrderId].ToString());
+                    }
                     list.Add(obj);
                 }
 
@@ -88,25 +113,52 @@ namespace Module.NPOI
             }
         }
 
-        private int GetPropOrderId<T>(string name)
+        private PropertyInfo GetPropByName(PropertyInfo[] props, string name)
         {
-            var props = typeof(T).GetProperties();
+            //var props = type.GetProperties();
             for (int i = 0; i < props.Length; i++)
             {
                 var prop = props[i];
-                if (_isOrderNum)
-                    return -1;
-                var nameAttr =
-                    prop.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault() as
-                        DisplayNameAttribute;
-                //1. DisplayName
-                //2. Prop Name
-                if (nameAttr != null && nameAttr.DisplayName == name)
-                    return i;
-                if (name == prop.Name)
-                    return i;
+                if (GetTypeAttrName(prop.PropertyType, name))
+                    return prop;
             }
-            return -1;
+            return null;
         }
+
+        protected virtual bool GetTypeAttrName(Type type, string name)
+        {
+            var displayAttr =
+                type.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as
+                        DisplayAttribute;
+            if (displayAttr != null && displayAttr.Name == name)
+            {
+                return true;
+            }
+
+            var displayNameAttr =
+                     type.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault() as
+                         DisplayNameAttribute;
+            if (displayNameAttr != null && displayNameAttr.DisplayName == name)
+            {
+                return true;
+            }
+
+            var descriptionAttr =
+                     type.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as
+                         DescriptionAttribute;
+            if (descriptionAttr != null && descriptionAttr.Description == name)
+            {
+                return true;
+            }
+
+            var typeName = type.Name;
+            if (typeName == name)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }
