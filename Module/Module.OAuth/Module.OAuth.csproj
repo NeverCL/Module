@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessProvider.cs" />
+    <Compile Include="AppBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RefreshProvider.cs" />
   </ItemGroup>
