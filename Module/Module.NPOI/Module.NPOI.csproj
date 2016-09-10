@@ -60,10 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileStreamLinq.cs" />
+    <Compile Include="ReadExcelLinq.cs" />
     <Compile Include="InvokeHelp.cs" />
     <Compile Include="ReadExcelHelp.cs" />
     <Compile Include="ReadExcel.cs" />
+    <Compile Include="WriteExcel.cs" />
     <Compile Include="WriteExcelHelp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

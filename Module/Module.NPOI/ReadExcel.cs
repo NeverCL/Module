@@ -33,20 +33,16 @@ namespace Module.NPOI
         }
         #endregion
 
-        #region ReadTo
-        public List<T> ReadTo<T>(string fileName, int sheetAt = 0) where T : new()
-        {
-            return ReadTo<T>(new FileStream(fileName, FileMode.Open), sheetAt);
-        }
 
-        public List<T> ReadTo<T>(FileStream fs, int sheetAt = 0) where T : new()
+
+        public List<T> ReadTo<T>(Stream fs, bool isXls, int sheetAt = 0) where T : new()
         {
             //1. workbook
             //2. headers
             //3. content
             using (fs)
             {
-                var workbook = Path.GetExtension(fs.Name) == ".xls"
+                var workbook = isXls
                         ? (IWorkbook)new HSSFWorkbook(fs) : new XSSFWorkbook(fs);
                 var sheet = workbook.GetSheetAt(sheetAt);
                 var headers = sheet.GetRow(0).Cells.Select(x => new ReadHeader
@@ -75,7 +71,6 @@ namespace Module.NPOI
                 return list;
             }
         }
-        #endregion
 
         private void SetPropValue(object obj, PropertyInfo prop, string value)
         {
@@ -115,7 +110,6 @@ namespace Module.NPOI
             }
             return -1;
         }
-
     }
 
     public class ReadHeader

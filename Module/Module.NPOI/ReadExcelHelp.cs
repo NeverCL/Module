@@ -17,6 +17,7 @@ namespace Module.NPOI
     /// 1. ReadExcel 根据Excel标题内容对应Model 特性Name对应
     /// 2. ReadExcelOrder 根据Excel标题顺序对应Model 属性顺序对应
     /// </summary>
+    [Obsolete("本方法已启用,改用ReadExcel的ReadTo方法")]
     public static class ReadExcelHelp
     {
         public static IEnumerable[] ReadBulkExcel(string fileName, params IEnumerable[] dataList)

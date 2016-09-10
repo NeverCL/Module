@@ -12,19 +12,33 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Module.NPOI.Tests
 {
     [TestClass]
-    public class TestReadExcel
+    public class ReadExcelTests
     {
-        [TestMethod]
-        public void ReadTo()
+        private readonly string _fileName = Guid.NewGuid().ToString() + ".xls";
+
+        public ReadExcelTests()
         {
-            var list = new ReadExcel(true).ReadTo<Model>(new FileStream("2.xls", FileMode.Open));
+            //todo write
+        }
+
+        [TestMethod]
+        public void ReadToByString()
+        {
+            var list = _fileName.ReadTo<Model>(true);
             Assert.IsTrue(list.Count == 30000);
         }
 
         [TestMethod]
-        public void ReadToLinq()
+        public void ReadToByFileStream()
         {
-            var list = new FileStream("2.xls", FileMode.Open).ReadTo<Model>(true);
+            var list = new FileStream(_fileName, FileMode.Open).ReadTo<Model>(true);
+            Assert.IsTrue(list.Count == 30000);
+        }
+
+        [TestMethod]
+        public void ReadToByStream()
+        {
+            var list = new MemoryStream(File.ReadAllBytes(_fileName)).ReadTo<Model>(true, true);
             Assert.IsTrue(list.Count == 30000);
         }
     }
