@@ -11,7 +11,7 @@ namespace Module.NPOI.Tests
     public class ReadExcelTests : IDisposable
     {
         private readonly string _fileName = Guid.NewGuid() + ".xls";
-        private readonly int _count = 10000;
+        private readonly int _count = 30000;
 
         public ReadExcelTests()
         {

@@ -12,7 +12,7 @@ namespace Module.NPOI.Tests
 
         private readonly string _fileName = Guid.NewGuid() + ".xls";
 
-        private readonly int _count = 1000;
+        private readonly int _count = 30000;
 
         public WriteExcelTests()
         {
