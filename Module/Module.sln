@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Application.Validate
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Tests.Tests", "Module.Tests.Tests\Module.Tests.Tests.csproj", "{976ECE0C-1628-486D-93C1-16D30A072FB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.OAuth", "Module.OAuth\Module.OAuth.csproj", "{238BEC6B-1D62-48DC-9F78-7A089EF60BDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.OAuth.Tests", "Module.OAuth.Tests\Module.OAuth.Tests.csproj", "{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +105,14 @@ Global
 		{976ECE0C-1628-486D-93C1-16D30A072FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{976ECE0C-1628-486D-93C1-16D30A072FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{976ECE0C-1628-486D-93C1-16D30A072FB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{238BEC6B-1D62-48DC-9F78-7A089EF60BDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238BEC6B-1D62-48DC-9F78-7A089EF60BDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238BEC6B-1D62-48DC-9F78-7A089EF60BDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238BEC6B-1D62-48DC-9F78-7A089EF60BDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,5 +124,6 @@ Global
 		{444282D5-C986-48B6-8B04-5553F7B0DE15} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 		{4238B641-7BD7-44BA-B870-F531339E0A9C} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 		{976ECE0C-1628-486D-93C1-16D30A072FB1} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
+		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 	EndGlobalSection
 EndGlobal
