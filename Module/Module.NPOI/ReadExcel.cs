@@ -77,20 +77,6 @@ namespace Module.NPOI
         }
         #endregion
 
-        //todo method
-        public IEnumerable[] ReadBulkTo(FileStream fs, params IEnumerable[] dataList)
-        {
-            for (int i = 0; i < dataList.Length; i++)
-            {
-                //1. 按顺序取sheet
-                //2. 对每个sheet还原
-                var list = dataList[i];
-                var model = InvokeHelp.InvokeGenericMethod(new object[] { fs, i }, typeof(ReadExcel), "ReadTo", list.GetType().GenericTypeArguments[0], this) as IEnumerable;
-                dataList[i] = model;
-            }
-            return dataList;
-        }
-
         private void SetPropValue(object obj, PropertyInfo prop, string value)
         {
             if (prop.PropertyType.IsEnum)

@@ -64,28 +64,5 @@ namespace Module.NPOI.Tests
         }
     }
 
-    [DisplayName("sheet名称")]
-    public class Model
-    {
-        [DisplayName("姓名")]
-        public string Name { get; set; }
-
-        [DisplayName("状态")]
-        public Statu Statu { get; set; }
-
-        [DisplayName("创建时间")]
-        [DisplayFormat(DataFormatString = "yyyy年MM月dd日")]
-        public DateTime Time { get; set; }
-
-        [NotMapped]
-        public int Id { get; set; }
-    }
-
-    public enum Statu
-    {
-        [Display(Name = "激活")]
-        Active,
-        [System.ComponentModel.DescriptionAttribute("关闭")]
-        Close
-    }
+ 
 }

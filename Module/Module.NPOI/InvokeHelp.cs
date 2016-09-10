@@ -13,7 +13,6 @@ namespace Module.NPOI
     {
         public static object InvokeGenericMethod(object[] args, Type classType, string methodName, Type genericType, object obj = null)
         {
-            var mets = classType.GetMethods();
             MethodInfo mi = classType.GetMethod(methodName);
             MethodInfo miConstructed = mi.MakeGenericMethod(genericType);
             return miConstructed.Invoke(obj, args);
