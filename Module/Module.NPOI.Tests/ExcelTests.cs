@@ -15,7 +15,7 @@ namespace Module.NPOI.Tests
         public void TestWriteExcel()
         {
             var data = new List<Model>();
-            for (int i = 0; i < 30000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 data.Add(new Model { Name = "测试名称" + i, Id = i, Time = DateTime.Now, Statu = i > 5 ? Statu.Active : Statu.Close });
             }

@@ -33,8 +33,6 @@ namespace Module.NPOI
         }
         #endregion
 
-
-
         public List<T> ReadTo<T>(Stream fs, bool isXls, int sheetAt = 0) where T : new()
         {
             //1. workbook
@@ -45,7 +43,7 @@ namespace Module.NPOI
                 var workbook = isXls
                         ? (IWorkbook)new HSSFWorkbook(fs) : new XSSFWorkbook(fs);
                 var sheet = workbook.GetSheetAt(sheetAt);
-                var headers = sheet.GetRow(0).Cells.Select(x => new ReadHeader
+                var headers = sheet.GetRow(0).Cells.Select(x => new HeaderInfo
                 {
                     Title = x.ToString(),
                     TitleOrderId = x.ColumnIndex,
@@ -110,25 +108,5 @@ namespace Module.NPOI
             }
             return -1;
         }
-    }
-
-    public class ReadHeader
-    {
-        /// <summary>
-        /// Excel 标题
-        /// </summary>
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Title 对应的顺序
-        /// 从0开始
-        /// </summary>
-        public int TitleOrderId { get; set; }
-
-        /// <summary>
-        /// T 属性 对应的顺序
-        /// 从0开始
-        /// </summary>
-        public int PropOrderId { get; set; }
     }
 }
