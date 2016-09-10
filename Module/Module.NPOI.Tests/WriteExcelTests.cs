@@ -12,7 +12,7 @@ namespace Module.NPOI.Tests
 
         private readonly string _fileName = Guid.NewGuid() + ".xls";
 
-        private readonly int _count = 100;
+        private readonly int _count = 1000;
 
         public WriteExcelTests()
         {
@@ -23,7 +23,7 @@ namespace Module.NPOI.Tests
             }
         }
 
-        [Fact(DisplayName = "原始new对象测试")]
+        [Fact(DisplayName = "原始new WriteExcel().WriteTo测试")]
         public void WriteTo()
         {
             new WriteExcel().WriteTo(_list, new FileStream(_fileName, FileMode.Create));
