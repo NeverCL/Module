@@ -36,7 +36,7 @@ namespace Module.NPOI
             {
                 var propertyInfo = type.GetProperties()[i];
                 if (IsNotMapper(propertyInfo)) continue;
-                var typeName = GetTypeAttrName(propertyInfo.PropertyType);
+                var typeName = GetPropAttrName(propertyInfo);
                 headers.Add(new HeaderInfo
                 {
                     PropOrderId = i,
@@ -108,6 +108,36 @@ namespace Module.NPOI
 
             return string.Empty;
         }
+
+        protected virtual string GetPropAttrName(PropertyInfo prop)
+        {
+            var displayAttr =
+                prop.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as
+                        DisplayAttribute;
+            if (displayAttr != null)
+            {
+                return displayAttr.Name;
+            }
+
+            var displayNameAttr =
+                     prop.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault() as
+                         DisplayNameAttribute;
+            if (displayNameAttr != null)
+            {
+                return displayNameAttr.DisplayName;
+            }
+
+            var descriptionAttr =
+                     prop.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as
+                         DescriptionAttribute;
+            if (descriptionAttr != null)
+            {
+                return descriptionAttr.Description;
+            }
+
+            return string.Empty;
+        }
+
 
         protected virtual ICellStyle CreateStyle(IWorkbook workbook)
         {

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
+using Should;
 using Xunit;
 
 namespace Module.NPOI.Tests
 {
-    public class ReadExcelTests
+    public class ReadExcelTests : IDisposable
     {
         private readonly string _fileName = Guid.NewGuid() + ".xls";
         private readonly int _count = 10000;
@@ -26,7 +27,7 @@ namespace Module.NPOI.Tests
         public void ReadToByFileStream()
         {
             var list = new FileStream(_fileName, FileMode.Open).ReadTo<Model>(true);
-            Assert.True(list.Count == _count);
+            list.Count.ShouldEqual(_count);
         }
 
         [Fact]
@@ -52,10 +53,14 @@ namespace Module.NPOI.Tests
             var list = _fileName.ReadExcelOrder<Model>();
             Assert.True(list.Count == _count);
         }
+
+        public void Dispose()
+        {
+            File.Delete(_fileName);
+        }
     }
 
 
-    //[DisplayName("sheet名称")]
     public class Model
     {
         //[DisplayName("姓名")]
@@ -70,14 +75,6 @@ namespace Module.NPOI.Tests
 
         [NotMapped]
         public int Id { get; set; }
-    }
-
-    public enum Statu
-    {
-        [Display(Name = "激活")]
-        Active,
-        [System.ComponentModel.DescriptionAttribute("关闭")]
-        Close
     }
 
 }

@@ -16,6 +16,7 @@ using NPOI.XSSF.UserModel;
 
 namespace Module.NPOI
 {
+    [Obsolete("使用WriteExcel的WriteTo方法")]
     public static class WriteExcelHelp
     {
         public static string DefaultSheetName = "sheet1";
