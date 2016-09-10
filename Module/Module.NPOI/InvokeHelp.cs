@@ -11,11 +11,11 @@ namespace Module.NPOI
 {
     public static class InvokeHelp
     {
-        public static object InvokeStaticGenericMethod(object[] args, Type classType, string methodName, Type genericType)
+        public static object InvokeGenericMethod(object[] args, Type classType, string methodName, Type genericType, object obj = null)
         {
             MethodInfo mi = classType.GetMethod(methodName);
             MethodInfo miConstructed = mi.MakeGenericMethod(genericType);
-            return miConstructed.Invoke(null, args);
+            return miConstructed.Invoke(obj, args);
         }
 
         public static string GetEnumName<T>(object value)

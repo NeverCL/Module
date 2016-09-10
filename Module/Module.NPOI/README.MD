@@ -1,4 +1,9 @@
-﻿## 说明
+﻿## TODO
+- ReadExcel 支持 NotMapper
+
+
+
+## 说明
 
 - Nuget安装
 ```
@@ -51,20 +56,12 @@ Install-Package Module.NPOI
 new List<Model>().WriteExcel("2.xls");
 ```
 
-- 多个sheet批量导出
-```C#
-WriteExcelHelp.WriteBulkExcel("1.xls", data, data, data);//data = new List<Model>()
-```
 
 - 单个sheet导入
 ```C#
 var data = "2.xls".ReadExcel<Model>();
 ```
 
-- 多个sheet批量导入
-```C#
-var dataList = ReadExcelHelp.ReadBulkExcel("3.xls", new List<Model>(), new List<Model>(), new List<Model>());
-```
 
 
 

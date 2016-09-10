@@ -34,9 +34,9 @@ namespace Module.Core
         {
         }
 
-        public static void GenerateViews(DbContext dbContext)
+        protected static void GenerateViews(DbContext db)
         {
-            using (var db = dbContext)
+            using (db)
             {
                 var objectContext = ((IObjectContextAdapter)db).ObjectContext;
                 var mappingCollection = (StorageMappingItemCollection)objectContext.MetadataWorkspace.GetItemCollection(DataSpace.CSSpace);

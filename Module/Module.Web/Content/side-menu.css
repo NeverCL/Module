@@ -1,0 +1,47 @@
+﻿.navbar {
+    z-index: -10;
+}
+
+.menu {
+    margin-top: 60px;
+    z-index: -20;
+    position: fixed;
+}
+
+.content {
+    margin-top: 60px;
+    position: absolute;
+    left: 190px;
+    right: 0;
+    overflow: hidden;
+}
+
+.side-nav {
+    position: relative;
+    display: block;
+    width: 190px;
+    float: left;
+    background-color: #f2f2f2;
+    padding-top: 0;
+    border-right: 1px solid #ccc;
+}
+
+    .side-nav:before {
+        content: "";
+        display: block;
+        width: 190px;
+        position: fixed;
+        bottom: 0;
+        top: 0;
+        z-index: -1;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+    }
+
+.nav-child {
+    padding-left: 20px;
+}
+
+ul#side-menu li a.active {
+    background-color: #BFBFBF;
+}
