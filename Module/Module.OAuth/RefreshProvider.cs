@@ -19,12 +19,35 @@ namespace Module.OAuth
         /// <returns></returns>
         public override async Task CreateAsync(AuthenticationTokenCreateContext context)
         {
-            string tokenValue = Guid.NewGuid().ToString("n");
             context.Ticket.Properties.IssuedUtc = DateTime.UtcNow;
             context.Ticket.Properties.ExpiresUtc = DateTime.UtcNow.AddDays(60);
-            RefreshTokens[tokenValue] = context.SerializeTicket();//加密当前ticket
-            context.SetToken(tokenValue);
+            var token = context.SerializeTicket();//加密当前ticket
+            context.SetToken(SaveToken(token));
             await base.CreateAsync(context);
+        }
+
+        /// <summary>
+        /// 保存refreshToken并返回content token
+        /// </summary>
+        /// <param name="refreshToken">真实token</param>
+        /// <returns>response 中的token</returns>
+        protected virtual string SaveToken(string refreshToken)
+        {
+            var key = Guid.NewGuid().ToString("n");
+            RefreshTokens[key] = refreshToken;
+            return key;
+        }
+
+        /// <summary>
+        /// 移除content token并返回真实refreshToken
+        /// </summary>
+        /// <param name="key">content token</param>
+        /// <returns>refreshToken</returns>
+        protected virtual string RemoveToken(string key)
+        {
+            string token;
+            RefreshTokens.TryRemove(key, out token);
+            return token;
         }
 
         /// <summary>
@@ -34,11 +57,9 @@ namespace Module.OAuth
         /// <returns></returns>
         public override Task ReceiveAsync(AuthenticationTokenReceiveContext context)
         {
-            string value;
-            if (RefreshTokens.TryRemove(context.Token, out value))
-            {
-                context.DeserializeTicket(value);
-            }
+            var token = RemoveToken(context.Token);
+            if (!string.IsNullOrEmpty(token))
+                context.DeserializeTicket(token);
             return base.ReceiveAsync(context);
         }
     }

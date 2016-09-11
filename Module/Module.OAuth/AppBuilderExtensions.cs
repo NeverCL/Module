@@ -32,5 +32,10 @@ namespace Owin
         {
             UseModuleOAuth(app, new AccessProvider(), refreshProvider);
         }
+
+        public static void UseModuleOAuth(this IAppBuilder app)
+        {
+            UseModuleOAuth(app, new AccessProvider(), new RefreshProvider());
+        }
     }
 }
