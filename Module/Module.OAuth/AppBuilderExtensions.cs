@@ -17,7 +17,7 @@ namespace Owin
             {
                 TokenEndpointPath = new PathString("/token"),
                 Provider = accessProvider,
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),//默认20分钟
                 AllowInsecureHttp = true,
                 RefreshTokenProvider = refreshProvider
             });

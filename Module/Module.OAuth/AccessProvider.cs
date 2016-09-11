@@ -4,6 +4,9 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace Module.OAuth
 {
+    /// <summary>
+    /// AccessToken 提供者
+    /// </summary>
     public class AccessProvider : OAuthAuthorizationServerProvider
     {
         //先验证客户端是否通过 
@@ -76,7 +79,7 @@ namespace Module.OAuth
         {
             var oAuthIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
             oAuthIdentity.AddClaim(new Claim(ClaimTypes.Name, context.ClientId));
-            oAuthIdentity.AddClaim(new Claim(ClaimTypes.Role, "app"));
+            oAuthIdentity.AddClaim(new Claim(ClaimTypes.Role, "App"));
             return oAuthIdentity;
         }
 
@@ -89,7 +92,7 @@ namespace Module.OAuth
         {
             var oAuthIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
             oAuthIdentity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
-            oAuthIdentity.AddClaim(new Claim(ClaimTypes.Role, "user"));
+            oAuthIdentity.AddClaim(new Claim(ClaimTypes.Role, "User"));
             return oAuthIdentity;
         }
     }

@@ -8,6 +8,9 @@ using Microsoft.Owin.Security.Infrastructure;
 
 namespace Module.OAuth
 {
+    /// <summary>
+    /// Refresh 提供者
+    /// </summary>
     public class RefreshProvider : AuthenticationTokenProvider
     {
         private static readonly ConcurrentDictionary<string, string> RefreshTokens = new ConcurrentDictionary<string, string>();
@@ -51,7 +54,8 @@ namespace Module.OAuth
         }
 
         /// <summary>
-        /// 在grant_type=refresh_token 且 经过ValidateClientAuthentication时调用
+        /// 在grant_type=refresh_token 
+        /// 且 经过ValidateClientAuthentication时调用(需自定义实现)
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
