@@ -15,12 +15,12 @@ namespace Module.WebApi
     {
         protected ILogger Logger { get; set; }
 
-        protected string GetUserId()
+        public string GetUserId()
         {
             return User.Identity.GetUserId();
         }
 
-        protected string GetUserName()
+        public string GetUserName()
         {
             return User.Identity.Name;
         }

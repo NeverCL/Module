@@ -12,7 +12,7 @@ namespace Module.WebApi
     {
         public override void OnException(HttpActionExecutedContext context)
         {
-            LogManager.GetCurrentClassLogger().Error(context.Exception);
+            LogManager.GetLogger(context.ActionContext.ControllerContext.Controller.GetType().Name).Error(context.Exception);
         }
     }
 }
