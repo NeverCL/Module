@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Filters;
+using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Newtonsoft.Json.Linq;
@@ -32,25 +33,30 @@ namespace Module.WebApi
         }
 
         [AllowAnonymous]
-        public void Login(LoginInfo loginInfo)
+        public RedirectResult Login(string token, string returnUrl)
         {
             var client = new HttpClient();
             var url = GetCfgValue("ssoUrl");
             string clientId = GetCfgValue("clientId"), clientSecret = GetCfgValue("clientSecret");
             var rst = client.PostAsync(url + "api/user/GetUserInfo", new FormUrlEncodedContent(new Dictionary<string, string>
             {
-                {"token",loginInfo.Token },
+                {"token",token },
                 {"clientId", clientId},
                 {"clientSecret", clientSecret}
             })).Result.Content.ReadAsStringAsync().Result;
-            var identity = new ClaimsIdentity(new[]
-            {
+            ClaimsIdentity identity = CreateIdentity(rst);
+            Request.GetOwinContext().Authentication.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
+            return Redirect(returnUrl);
+        }
+
+        protected virtual ClaimsIdentity CreateIdentity(string rst)
+        {
+            return new ClaimsIdentity(new[]
+                        {
                 new Claim(ClaimTypes.Name, JObject.Parse(rst)["Id"].Value<string>()),
                 new Claim(ClaimTypes.Name, JObject.Parse(rst)["UserName"].Value<string>()),
                 new Claim(ClaimTypes.GivenName, JObject.Parse(rst)["DisplayName"].Value<string>())
             }, DefaultAuthenticationTypes.ApplicationCookie);
-            Request.GetOwinContext().Authentication.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
-            Redirect(loginInfo.ReturnUrl);
         }
 
         protected virtual string GetCfgValue(string name)
@@ -64,5 +70,5 @@ namespace Module.WebApi
             return "Hello World";
         }
     }
-   
+
 }
