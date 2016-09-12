@@ -9,6 +9,11 @@ namespace Module.OAuth
     /// </summary>
     public class AccessProvider : OAuthAuthorizationServerProvider
     {
+        protected string ClientId { get; set; }
+        protected string ClientSecret { get; set; }
+        protected string UserName { get; set; }
+        protected string Password { get; set; }
+
         //先验证客户端是否通过 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
@@ -18,6 +23,8 @@ namespace Module.OAuth
             {
                 context.TryGetBasicCredentials(out clientId, out clientSecret);
             }
+            ClientId = clientId;
+            ClientSecret = clientSecret;
             //validate
             if (ValidateClient(clientId, clientSecret))
             {
@@ -40,6 +47,8 @@ namespace Module.OAuth
         public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             //validate
+            UserName = context.UserName;
+            Password = context.Password;
             if (ValidateUser(context.UserName, context.Password))
             {
                 var oAuthIdentity = CreateUserClaims(context);
