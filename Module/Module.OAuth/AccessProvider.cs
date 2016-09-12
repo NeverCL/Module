@@ -87,8 +87,7 @@ namespace Module.OAuth
         protected virtual ClaimsIdentity CreateClientClaims(OAuthGrantClientCredentialsContext context)
         {
             var oAuthIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
-            oAuthIdentity.AddClaim(new Claim(ClaimTypes.Name, context.ClientId));
-            oAuthIdentity.AddClaim(new Claim(ClaimTypes.Role, "App"));
+            oAuthIdentity.AddClaim(new Claim("ClientId", context.ClientId));
             return oAuthIdentity;
         }
 
@@ -101,7 +100,6 @@ namespace Module.OAuth
         {
             var oAuthIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
             oAuthIdentity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
-            oAuthIdentity.AddClaim(new Claim(ClaimTypes.Role, "User"));
             return oAuthIdentity;
         }
     }

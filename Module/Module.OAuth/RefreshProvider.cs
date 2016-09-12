@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Infrastructure;
@@ -25,7 +26,7 @@ namespace Module.OAuth
             context.Ticket.Properties.IssuedUtc = DateTime.UtcNow;
             context.Ticket.Properties.ExpiresUtc = DateTime.UtcNow.AddDays(60);
             var token = context.SerializeTicket();//加密当前ticket
-            context.SetToken(SaveToken(token));
+            context.SetToken(SaveToken(token, context.Ticket.Identity));
             await base.CreateAsync(context);
         }
 
@@ -33,8 +34,9 @@ namespace Module.OAuth
         /// 保存refreshToken并返回content token
         /// </summary>
         /// <param name="refreshToken">真实token</param>
+        /// <param name="identity">当前身份信息</param>
         /// <returns>response 中的token</returns>
-        protected virtual string SaveToken(string refreshToken)
+        protected virtual string SaveToken(string refreshToken, ClaimsIdentity identity)
         {
             var key = Guid.NewGuid().ToString("n");
             RefreshTokens[key] = refreshToken;
