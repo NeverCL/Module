@@ -97,8 +97,10 @@ namespace Module.OAuth
         /// <returns></returns>
         protected virtual ClaimsIdentity CreateUserClaims(OAuthGrantResourceOwnerCredentialsContext context)
         {
+            //context.Ticket
             var oAuthIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
             oAuthIdentity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+            oAuthIdentity.AddClaim(new Claim("ClientId", context.ClientId));
             return oAuthIdentity;
         }
     }
