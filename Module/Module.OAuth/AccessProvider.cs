@@ -36,9 +36,8 @@ namespace Module.OAuth
         //再分配客户端令牌
         public override Task GrantClientCredentials(OAuthGrantClientCredentialsContext context)
         {
-            var oAuthIdentity = CreateClientClaims(context);
-            //var ticket = new AuthenticationTicket(oAuthIdentity, new AuthenticationProperties());
-            context.Validated(oAuthIdentity);//调用该方法表示分配令牌
+            var identity = CreateClientClaims(context);
+            context.Validated(identity);//调用该方法表示分配令牌
             //context.OwinContext.Response.Headers["Access-Control-Allow-Origin"] = "http://localhost:9527";//支持cros
             return base.GrantClientCredentials(context);
         }
