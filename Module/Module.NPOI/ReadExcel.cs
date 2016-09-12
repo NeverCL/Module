@@ -86,7 +86,10 @@ namespace Module.NPOI
                     foreach (var headerInfo in headers)
                     {
                         var prop = headerInfo.Property;
-                        SetPropValue(obj, prop, row.Cells[headerInfo.TitleOrderId].ToString());
+                        if (headerInfo.TitleOrderId >= row.Cells.Count)
+                            continue;
+                        var cell = row.Cells[headerInfo.TitleOrderId];
+                        SetPropValue(obj, prop, cell.CellType == CellType.Numeric ? cell.DateCellValue.ToString() : cell.ToString());
                     }
                     list.Add(obj);
                 }
@@ -119,10 +122,39 @@ namespace Module.NPOI
             for (int i = 0; i < props.Length; i++)
             {
                 var prop = props[i];
-                if (GetTypeAttrName(prop.PropertyType, name))
+                if (GetPropAttrName(prop) == name)
                     return prop;
             }
             return null;
+        }
+
+        protected virtual string GetPropAttrName(PropertyInfo prop)
+        {
+            var displayAttr =
+                prop.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as
+                        DisplayAttribute;
+            if (displayAttr != null)
+            {
+                return displayAttr.Name;
+            }
+
+            var displayNameAttr =
+                     prop.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault() as
+                         DisplayNameAttribute;
+            if (displayNameAttr != null)
+            {
+                return displayNameAttr.DisplayName;
+            }
+
+            var descriptionAttr =
+                     prop.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as
+                         DescriptionAttribute;
+            if (descriptionAttr != null)
+            {
+                return descriptionAttr.Description;
+            }
+
+            return string.Empty;
         }
 
         protected virtual bool GetTypeAttrName(Type type, string name)
