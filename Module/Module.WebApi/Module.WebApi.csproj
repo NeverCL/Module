@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseApiController.cs" />
+    <Compile Include="LoginInfo.cs" />
     <Compile Include="NotImplExceptionFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

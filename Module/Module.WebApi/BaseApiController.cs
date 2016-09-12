@@ -19,11 +19,13 @@ namespace Module.WebApi
     {
         protected ILogger Logger { get; set; }
 
+        [HttpGet]
         public string GetUserId()
         {
             return User.Identity.GetUserId();
         }
 
+        [HttpGet]
         public string GetUserName()
         {
             return User.Identity.Name;
@@ -62,11 +64,5 @@ namespace Module.WebApi
             return "Hello World";
         }
     }
-
-    public class LoginInfo
-    {
-        public string Token { get; set; }
-
-        public string ReturnUrl { get; set; }
-    }
+   
 }
