@@ -1,6 +1,6 @@
 ﻿(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define(['angular', 'datepicker'], factory);
+    if (typeof root.define === 'function' && root.define.amd) {
+        root.define(['angular', 'datepicker'], factory);
     } else factory();
 }(window, function () {
     'use strict';
