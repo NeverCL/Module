@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Newtonsoft.Json.Linq;
 using NLog;
+using System.Configuration;
 
 namespace Module.WebApi
 {
@@ -33,6 +34,7 @@ namespace Module.WebApi
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public RedirectResult Login(string token, string returnUrl)
         {
             var client = new HttpClient();
@@ -46,14 +48,14 @@ namespace Module.WebApi
             })).Result.Content.ReadAsStringAsync().Result;
             ClaimsIdentity identity = CreateIdentity(rst);
             Request.GetOwinContext().Authentication.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
-            return Redirect(returnUrl);
+            return Redirect(new Uri(returnUrl, UriKind.RelativeOrAbsolute));
         }
 
         protected virtual ClaimsIdentity CreateIdentity(string rst)
         {
             return new ClaimsIdentity(new[]
                         {
-                new Claim(ClaimTypes.Name, JObject.Parse(rst)["Id"].Value<string>()),
+                new Claim(ClaimTypes.NameIdentifier, JObject.Parse(rst)["Id"].Value<string>()),
                 new Claim(ClaimTypes.Name, JObject.Parse(rst)["UserName"].Value<string>()),
                 new Claim(ClaimTypes.GivenName, JObject.Parse(rst)["DisplayName"].Value<string>())
             }, DefaultAuthenticationTypes.ApplicationCookie);
@@ -61,7 +63,7 @@ namespace Module.WebApi
 
         protected virtual string GetCfgValue(string name)
         {
-            return name;
+            return ConfigurationManager.AppSettings[name];
         }
 
         [HttpGet]
