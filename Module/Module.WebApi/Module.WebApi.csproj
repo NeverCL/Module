@@ -81,6 +81,7 @@
     <Compile Include="BaseApiController.cs" />
     <Compile Include="NotImplExceptionFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SsoController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
