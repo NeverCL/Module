@@ -6,3 +6,15 @@
     margin: 0;
     padding: 0;
 }
+
+.pagination a {
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 10px !important;
+}
+
+select {
+    width: 180px !important;
+}
