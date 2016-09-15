@@ -1,6 +1,6 @@
 ﻿(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define(['jquery', 'moment', 'angular', 'datepicker'], function (jquery, moment) {
+    if (typeof root.define === 'function' && root.define.amd) {
+        root.define(['jquery', 'moment', 'angular', 'datepicker'], function (jquery, moment) {
             factory(jquery, moment);
         });
     } else factory(root.jQuery);
@@ -69,8 +69,7 @@
             picker.daterangepicker(opts);
 
             modelCtrl.$formatters.push(function (objValue) {
-                var f;
-                f = function (date) {
+                var f = function (date) {
                     if (!moment.isMoment(date)) {
                         return moment(date).format(opts.locale.format);
                     } else {

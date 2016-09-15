@@ -12,8 +12,8 @@
     }
 });
 
-define(['ngAnimate', 'uiRoute'], function () {
-    var app = angular.module("myApp", ['ngAnimate', 'ui.router'])
+define(['ngAnimate', 'uiRoute', 'modules/angular-pager', 'modules/angular-common', 'modules/angular-datepicker'], function () {
+    var app = angular.module("myApp", ['ngAnimate', 'ui.router', 'ng.common', 'ng.bs.datepicker', 'ng.bs.pager'])
        .config(function ($controllerProvider, $compileProvider, $filterProvider, $provide) {
            app.register = {
                controller: $controllerProvider.register,

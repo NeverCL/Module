@@ -11,14 +11,18 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="baseUserCtrl">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">XX系统-后台管理</a>
+            <div class="container-fluid">
+                <div class="navbar-header pull-left">
+                    <a class="navbar-brand" href="/">
+                        <img src="../Images/favicon.ico" alt="统一用户平台">
+                    </a>
+                </div>
+                <p class="navbar-text pull-right">
+                    <a href="{{user.DisplayName?'#':'/api/base/ssologin'}}" ng-bind="user.DisplayName||'登录'"></a>
+                </p>
             </div>
-            <p class="navbar-text pull-right">
-                <a href="/Account/Login">登录</a>
-            </p>
         </div>
     </nav>
     <div class="menu">
@@ -48,7 +52,6 @@
         </div>
     </div>
     <div class="content container-fluid" ui-view></div>
-    <div modal></div>
 </body>
 
 </html>

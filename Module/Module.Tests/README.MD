@@ -13,8 +13,6 @@ https://effort.codeplex.com/wikipage?title=Create%20a%20fake%20DbContext%20insta
 
 - module.application.validate
 
-- xUnit
-
 - should
 
-
+- xUnit (去除依赖)
