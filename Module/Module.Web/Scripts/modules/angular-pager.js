@@ -114,7 +114,7 @@
                         else
                             len++;
                     } else {
-                        var index = scope.index + 3 - i;
+                        var index = scope.index - i + 3;
                         if (index < scope.total)
                             pageArr.push(buildItem(scope, index));
                         else
