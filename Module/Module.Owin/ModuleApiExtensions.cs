@@ -14,15 +14,27 @@ namespace Module.Owin
 {
     public static class ModuleApiExtensions
     {
-        public static IAppBuilder UseModuleApi(IAppBuilder app, ContainerBuilder builder, int[] interceptTypes, params Type[] types)
+        public static IAppBuilder UseModuleApi(this IAppBuilder app, ContainerBuilder builder, int[] interceptTypes, params Type[] types)
         {
             ConfigApi(app, "api/{controller}/{action}/{id}", builder, interceptTypes, types);
             return app;
         }
 
-        public static IAppBuilder UseModuleApi(IAppBuilder app, ContainerBuilder builder, params Type[] types)
+        public static IAppBuilder UseModuleApi(this IAppBuilder app, ContainerBuilder builder, params Type[] types)
         {
             ConfigApi(app, "api/{controller}/{action}/{id}", builder, null, types);
+            return app;
+        }
+
+        public static IAppBuilder UseModuleApi(this IAppBuilder app, params Type[] types)
+        {
+            ConfigApi(app, "api/{controller}/{action}/{id}", new ContainerBuilder(), null, types);
+            return app;
+        }
+
+        public static IAppBuilder UseModuleApi(this IAppBuilder app, int[] interceptTypes, params Type[] types)
+        {
+            ConfigApi(app, "api/{controller}/{action}/{id}", new ContainerBuilder(), interceptTypes, types);
             return app;
         }
 
