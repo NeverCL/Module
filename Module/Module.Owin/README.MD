@@ -21,9 +21,10 @@ ConfigApi
 
 UseCookieAuthentication
 
+## API
 
-- UseModuleCookie("")
+- app.UseModuleCookie()
 
-- UseModuleApi("")
+- app.UseModuleApi()
 
 
