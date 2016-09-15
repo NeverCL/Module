@@ -5,8 +5,9 @@
         datepicker: 'daterangepicker'
     },
     shim: {
+        jquery: ['cfg'],
         metisMenu: ['bootstrap'],
-        bootstrap: ['jquery', 'cfg'],
+        bootstrap: ['jquery'],
         datepicker: ['bootstrap']
     }
 });
