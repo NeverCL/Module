@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Core", "Module.Core\Module.Core.csproj", "{610D7FBC-1F2D-436C-81EB-695EC15E15E5}"
 EndProject
@@ -38,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.OAuth", "Module.OAuth\Module.OAuth.csproj", "{238BEC6B-1D62-48DC-9F78-7A089EF60BDD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.OAuth.Tests", "Module.OAuth.Tests\Module.OAuth.Tests.csproj", "{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Owin", "Module.Owin\Module.Owin.csproj", "{93DADCD5-B12B-4B30-9916-790AAD33CBE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +115,10 @@ Global
 		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93DADCD5-B12B-4B30-9916-790AAD33CBE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93DADCD5-B12B-4B30-9916-790AAD33CBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93DADCD5-B12B-4B30-9916-790AAD33CBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93DADCD5-B12B-4B30-9916-790AAD33CBE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
