@@ -122,7 +122,7 @@
                     }
                 }
                 pages = pages.concat(pageArr.sort(sortNumber));
-                if (scope.index < scope.total - 5)
+                if (scope.index < scope.total - 4)
                     pages.push(buildItem(scope, cfg.omitText));
                 pages.push(buildItem(scope, scope.total));
             }
