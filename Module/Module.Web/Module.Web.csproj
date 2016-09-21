@@ -81,6 +81,7 @@
     <Content Include="Scripts\modules\angular-common.js" />
     <Content Include="Scripts\modules\angular-datepicker.js" />
     <Content Include="Scripts\modules\angular-editor.js" />
+    <Content Include="Scripts\modules\angular-file.js" />
     <Content Include="Scripts\modules\angular-pager.js" />
     <Content Include="Scripts\plugins\bs-btn-alert.js" />
     <Content Include="Scripts\plugins\bs-btn-modal.js" />

@@ -13,8 +13,8 @@
     }
 });
 
-define(['ngAnimate', 'uiRoute', 'modules/angular-pager', 'modules/angular-common', 'modules/angular-datepicker', 'modules/angular-datepicker'], function () {
-    var app = angular.module("myApp", ['ngAnimate', 'ui.router', 'ng.common', 'ng.bs.datepicker', 'ng.bs.pager', 'ng.editor'])
+define(['ngAnimate', 'uiRoute', 'modules/angular-pager', 'modules/angular-common', 'modules/angular-datepicker', 'modules/angular-datepicker', 'modules/angular-file'], function () {
+    var app = angular.module("myApp", ['ngAnimate', 'ui.router', 'ng.common', 'ng.bs.datepicker', 'ng.bs.pager', 'ng.editor', 'ng.bs.file'])
        .config(function ($controllerProvider, $compileProvider, $filterProvider, $provide) {
            app.register = {
                controller: $controllerProvider.register,
