@@ -7,13 +7,14 @@
     },
     shim: {
         uiRoute: ['lang'],
-        lang: ['angular', 'cfg'],
+        angular: ['cfg', 'jquery'],
+        lang: ['angular'],
         ngAnimate: ['lang']
     }
 });
 
-define(['ngAnimate', 'uiRoute', 'modules/angular-pager', 'modules/angular-common', 'modules/angular-datepicker'], function () {
-    var app = angular.module("myApp", ['ngAnimate', 'ui.router', 'ng.common', 'ng.bs.datepicker', 'ng.bs.pager'])
+define(['ngAnimate', 'uiRoute', 'modules/angular-pager', 'modules/angular-common', 'modules/angular-datepicker', 'modules/angular-datepicker'], function () {
+    var app = angular.module("myApp", ['ngAnimate', 'ui.router', 'ng.common', 'ng.bs.datepicker', 'ng.bs.pager', 'ng.editor'])
        .config(function ($controllerProvider, $compileProvider, $filterProvider, $provide) {
            app.register = {
                controller: $controllerProvider.register,
