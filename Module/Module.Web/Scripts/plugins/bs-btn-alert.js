@@ -4,6 +4,7 @@
     } else factory();
 }(window, function ($) {
     //'use strict';
+    var doc = {};
     function DelModal(opt) {
         this.opt = opt;
         this.$modal = {};
@@ -39,6 +40,12 @@
                         $('.btn-default:contains("查询")').click();
                     });
                 } else {
+                    try {
+                        var str = "doc['" + that.defaults.click + "']()";
+                        eval(str);
+                    } catch (e) {
+                        console.log(e);
+                    }
                     modal.modal('hide');
                 }
             });
@@ -51,4 +58,6 @@
         new DelModal($(e.target).data()).show();
         return false;
     });
+
+    window.doc = doc;
 }));
