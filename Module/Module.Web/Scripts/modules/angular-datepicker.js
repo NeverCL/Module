@@ -66,7 +66,7 @@
             }
             if (attrs.format)
                 opts.locale.format = attrs.format;
-            picker.daterangepicker(opts);
+            picker.daterangepicker(opts, function (start, end) { modelCtrl.$setViewValue(start.format(opts.locale.format)); });
 
             modelCtrl.$formatters.push(function (objValue) {
                 var f = function (date) {
