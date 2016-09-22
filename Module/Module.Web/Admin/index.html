@@ -10,18 +10,19 @@
     <script data-main="../Scripts/main" src="../Scripts/require.js" defer async="true"></script>
 </head>
 
-<body>
-    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="baseUserCtrl">
+<body ng-controller="baseCtrl" ng-show="user">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="container-fluid">
                 <div class="navbar-header pull-left">
                     <a class="navbar-brand" href="/">
-                        <img src="../Images/favicon.ico" alt="统一用户平台">
+                        <img src="../Images/favicon.ico" alt="xx系统">
                     </a>
                 </div>
-                <p class="navbar-text pull-right">
-                    <a href="{{user.DisplayName?'#':'/api/base/ssologin'}}" ng-bind="user.DisplayName||'登录'"></a>
-                </p>
+                <div class="navbar-text pull-right" ng-show="user">
+                    <p class="systemTime" ng-bind="currentTime"></p>
+                    <div class="text-right"><a href="{{user.DisplayName?'../api/ssologin/Logout':'../api/ssologin/LoginUrl'}}" ng-bind="user.DisplayName||'登录'"></a></div>
+                </div>
             </div>
         </div>
     </nav>

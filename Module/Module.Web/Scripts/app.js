@@ -45,5 +45,55 @@ define(['ngAnimate', 'uiRoute', 'modules/angular-pager', 'modules/angular-common
             }
         };
     }
+
+    app.controller('baseCtrl', function ($scope, $http, $filter) {
+        $scope.load = true;
+
+        setInterval(function () { $scope.$apply(function () { $scope.currentTime = $filter('date')(new Date, 'yyyy-MM-dd hh:mm:ss') }) }, 1000);
+
+        if (cfg.debug === 'localc#' || cfg.debug === 'localweb') {
+            $scope.user = {
+                DisplayName: '管理员',
+                Roles: [{
+                    Name: 'admin'
+                }]
+            }
+            $scope.load = false;
+        } else {
+            $.get(cfg.host + 'SsoLogin/GetToken', function (token) {
+                if (token) {
+                    $.ajax({
+                        url: cfg.userUrl,
+                        headers: {
+                            Authorization: 'Bearer ' + token
+                        },
+                        success: function (rst) {
+                            $scope.user = rst;
+                            $scope.load = false;
+                        }
+                    })
+                } else {
+                    window.location = cfg.host + 'SsoLogin/LoginUrl';
+                }
+            }).complete(function (rst) {
+                if (rst.status === 500)
+                    window.location = cfg.host + 'SsoLogin/LoginUrl';
+            });
+        }
+
+        $scope.isInRole = function () {
+            if (!$scope.user || !$scope.user.Roles)
+                return false;
+            var roles = $scope.user.Roles;
+            var tmpRoles = arguments;
+            for (var i = 0; i < roles.length; i++) {
+                for (var j = 0; j < tmpRoles.length; j++) {
+                    if (roles[i].Name === tmpRoles[j]) 
+                        return true;
+                }
+            }
+            return false;
+        }
+    });
     return app;
 });
