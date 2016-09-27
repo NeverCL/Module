@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ namespace Module.Identity.ActiveDirectory
         private readonly PrincipalContext _context;
         public ActiveDomainClient(string domain)
         {
+            var val = ConfigurationManager.AppSettings[domain];
+            if (!string.IsNullOrEmpty(val))
+                domain = val;
             _context = new PrincipalContext(ContextType.Domain, domain);
         }
 
