@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Core", "Module.Core\Module.Core.csproj", "{610D7FBC-1F2D-436C-81EB-695EC15E15E5}"
 EndProject
@@ -42,6 +42,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.WebApi.Tests", "Module.WebApi.Tests\Module.WebApi.Tests.csproj", "{4A140B07-6F16-417C-9589-B947AA50E3EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Owin", "Module.Owin\Module.Owin.csproj", "{93DADCD5-B12B-4B30-9916-790AAD33CBE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Identity.ActiveDirectory", "Module.Identity.ActiveDirectory\Module.Identity.ActiveDirectory.csproj", "{3522EF5B-D4F7-4989-91C8-BE2CD22D4D33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Identity.ActiveDirectory.Tests", "Module.Identity.ActiveDirectory.Tests\Module.Identity.ActiveDirectory.Tests.csproj", "{890B136F-ACAF-4411-AE2F-F2D37A87A64A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +129,14 @@ Global
 		{93DADCD5-B12B-4B30-9916-790AAD33CBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93DADCD5-B12B-4B30-9916-790AAD33CBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93DADCD5-B12B-4B30-9916-790AAD33CBE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3522EF5B-D4F7-4989-91C8-BE2CD22D4D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3522EF5B-D4F7-4989-91C8-BE2CD22D4D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3522EF5B-D4F7-4989-91C8-BE2CD22D4D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3522EF5B-D4F7-4989-91C8-BE2CD22D4D33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{890B136F-ACAF-4411-AE2F-F2D37A87A64A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{890B136F-ACAF-4411-AE2F-F2D37A87A64A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{890B136F-ACAF-4411-AE2F-F2D37A87A64A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{890B136F-ACAF-4411-AE2F-F2D37A87A64A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,5 +150,6 @@ Global
 		{976ECE0C-1628-486D-93C1-16D30A072FB1} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 		{4A140B07-6F16-417C-9589-B947AA50E3EE} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
+		{890B136F-ACAF-4411-AE2F-F2D37A87A64A} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 	EndGlobalSection
 EndGlobal
