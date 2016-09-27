@@ -41,7 +41,20 @@ namespace Module.Identity.ActiveDirectory
             //    //};
             //    return true;
             //}
+            
         }
+
+        /// <summary>
+        /// 取Domain版本 2003 2008等
+        /// </summary>
+        //private void DomainModeCheck(string UserName, string Password, string Domain)
+        //{
+        //    DirectoryContext oContext = null;
+
+        //    oContext = new DirectoryContext(DirectoryContextType.Domain, Domain, UserName, Password);
+        //    DomainMode DM = System.DirectoryServices.ActiveDirectory.Domain.GetDomain(oContext).DomainMode;
+
+        //}
 
         public void Dispose()
         {
