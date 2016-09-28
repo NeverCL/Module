@@ -28,7 +28,7 @@
 
         function tmpPager(el, attrs) {
             return '<div class="form-inline" ng-show="count!=-1">' +
-                 '<label>{{"共条"+count+"数据,每页"+size+"条数据"}}</label>' +
+                 '<label>{{"共"+count+"条数据,每页"+size+"条数据"}}</label>' +
                  '<ul class="pagination pull-right" style="margin:0;">' +
                  '<li ng-click="actionLi(index-1)" ng-class="{disabled:index<=1}" ng-hide="count==0">' +
                  '<a>' +
