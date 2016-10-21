@@ -10,13 +10,18 @@ namespace Module.Application
     {
         protected string GetUserId()
         {
+            return GetUser().GetUserId();
+        }
+
+        protected ClaimsIdentity GetUser()
+        {
             var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
             if (claimsPrincipal == null)
                 return null;
             var claimsIdentity = claimsPrincipal.Identity as ClaimsIdentity;
             if (claimsIdentity == null)
                 return null;
-            return claimsIdentity.GetUserId();
+            return claimsIdentity;
         }
     }
 
