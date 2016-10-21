@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Identity.ActiveDirec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Identity.ActiveDirectory.Tests", "Module.Identity.ActiveDirectory.Tests\Module.Identity.ActiveDirectory.Tests.csproj", "{890B136F-ACAF-4411-AE2F-F2D37A87A64A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Picture", "Module.Picture\Module.Picture.csproj", "{BC0029DA-927F-46E5-9181-206A3DCCC45A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,10 @@ Global
 		{890B136F-ACAF-4411-AE2F-F2D37A87A64A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{890B136F-ACAF-4411-AE2F-F2D37A87A64A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{890B136F-ACAF-4411-AE2F-F2D37A87A64A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC0029DA-927F-46E5-9181-206A3DCCC45A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC0029DA-927F-46E5-9181-206A3DCCC45A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC0029DA-927F-46E5-9181-206A3DCCC45A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC0029DA-927F-46E5-9181-206A3DCCC45A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
