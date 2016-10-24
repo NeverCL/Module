@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Compress", "Module.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Compress.Tests", "Module.Compress.Tests\Module.Compress.Tests.csproj", "{2FF3A21E-7087-437F-9B57-800804D9B653}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Identity.Cookie", "Module.Identity.Cookie\Module.Identity.Cookie.csproj", "{26AB16D0-5897-4634-8BCB-21C4C49081FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +151,10 @@ Global
 		{2FF3A21E-7087-437F-9B57-800804D9B653}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FF3A21E-7087-437F-9B57-800804D9B653}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FF3A21E-7087-437F-9B57-800804D9B653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26AB16D0-5897-4634-8BCB-21C4C49081FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26AB16D0-5897-4634-8BCB-21C4C49081FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26AB16D0-5897-4634-8BCB-21C4C49081FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26AB16D0-5897-4634-8BCB-21C4C49081FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
