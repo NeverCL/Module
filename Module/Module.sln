@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Identity.ActiveDirec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Compress", "Module.Compress\Module.Compress.csproj", "{B6851D4C-AFE0-4808-9BA7-B03DCC58E385}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.Compress.Tests", "Module.Compress.Tests\Module.Compress.Tests.csproj", "{2FF3A21E-7087-437F-9B57-800804D9B653}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,10 @@ Global
 		{B6851D4C-AFE0-4808-9BA7-B03DCC58E385}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6851D4C-AFE0-4808-9BA7-B03DCC58E385}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6851D4C-AFE0-4808-9BA7-B03DCC58E385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF3A21E-7087-437F-9B57-800804D9B653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF3A21E-7087-437F-9B57-800804D9B653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF3A21E-7087-437F-9B57-800804D9B653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF3A21E-7087-437F-9B57-800804D9B653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,5 +163,6 @@ Global
 		{A241DFE8-E4A7-4EDC-A2C3-8E54AC8C946C} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 		{4A140B07-6F16-417C-9589-B947AA50E3EE} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 		{890B136F-ACAF-4411-AE2F-F2D37A87A64A} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
+		{2FF3A21E-7087-437F-9B57-800804D9B653} = {BC1B5AAE-EF03-44D8-8BCC-E443C0EE1E88}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
@@ -16,49 +17,67 @@ namespace Module.Compress
         /// <param name="filePath"></param>
         public static void SaveImg(this Image bitmap, string filePath)
         {
+            using (bitmap)
+                bitmap.Save(filePath, GetImageFormat(filePath));
+        }
+
+        public static ImageFormat GetImageFormat(string filePath)
+        {
+            var ext = (ImageFormat)null;
             switch (Path.GetExtension(filePath))
             {
                 case ".gif":
                 case ".GIF":
-                    bitmap.Save(filePath, ImageFormat.Gif);
+                    ext = ImageFormat.Gif;
                     break;
                 case ".jpg":
                 case ".JPG":
-                    bitmap.Save(filePath, ImageFormat.Jpeg);
+                    ext = ImageFormat.Jpeg;
                     break;
                 case ".bmp":
                 case ".BMP":
-                    bitmap.Save(filePath, ImageFormat.Bmp);
+                    ext = ImageFormat.Bmp;
                     break;
                 case ".png":
                 case ".PNG":
-                    bitmap.Save(filePath, ImageFormat.Png);
+                    ext = ImageFormat.Png;
                     break;
+            }
+            return ext;
+        }
+
+        /// <summary>
+        /// 压缩图片
+        /// </summary>
+        /// <param name="sourceImg"></param>
+        /// <param name="targetSize"></param>
+        /// <returns></returns>
+        public static Image CompressionToSize(this Image sourceImg, long targetSize = 200 * 1024)
+        {
+            using (var memory = new MemoryStream())
+            {
+                sourceImg.Save(memory, sourceImg.RawFormat);
+                var fileSize = memory.Length;
+                return CompressionToSize(sourceImg, fileSize, targetSize);
             }
         }
 
-        /// <summary>
-        /// 根据指定大小压缩图片
-        /// </summary>
-        /// <param name="sourceImg">原图像</param>
-        /// <param name="fileSize">图像文件大小</param>
-        /// <param name="targetSize">文件最大目标大小</param>
-        /// <returns></returns>
-        public static Image CompressionImg(Image sourceImg, int fileSize, int targetSize = 200 * 1024)
+        public static Image CompressionToSize(this Image sourceImg, long fileSize, long targetSize)
         {
-            var times = 1 / (fileSize / (double)(200 * 1024));
-            return CompressionImg(sourceImg, times);
+            var times = 1 / Math.Ceiling(Math.Sqrt(fileSize / (double)targetSize));
+            return CompressionByTimes(sourceImg, times);
         }
 
         /// <summary>
-        /// 调整图片尺寸
+        /// 根据压缩系数 压缩图片
         /// </summary>
-        /// <param name="sourceImg">原图</param>
-        /// <param name="times">压缩系数</param>
-        public static Image CompressionImg(Image sourceImg, double times = 0.5)
+        /// <param name="sourceImg"></param>
+        /// <param name="times"></param>
+        /// <returns></returns>
+        public static Image CompressionByTimes(this Image sourceImg, double times = 0.5)
         {
-            var width = (int)(sourceImg.Width * times);
-            var height = (int)(sourceImg.Height * times);
+            var width = (int)Math.Floor(sourceImg.Width * times);
+            var height = (int)Math.Floor(sourceImg.Height * times);
             var targetImg = new Bitmap(sourceImg, width, height);
             return targetImg;
         }
