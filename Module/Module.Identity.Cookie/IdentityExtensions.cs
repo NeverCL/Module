@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Security.Claims;
 using System.Security.Principal;
-using Module.Identity.Cookie;
+using Microsoft.Owin.Security;
 
 namespace Microsoft.AspNet.Identity
 {
