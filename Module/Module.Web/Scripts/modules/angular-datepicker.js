@@ -66,7 +66,17 @@
             }
             if (attrs.format)
                 opts.locale.format = attrs.format;
-            picker.daterangepicker(opts, function (start, end) { modelCtrl.$setViewValue(start.format(opts.locale.format)); });
+            picker.daterangepicker(opts, function (start, end) {
+                if (this.element.is('input') && !this.singleDatePicker) {
+                    this.element.val(start.format(this.locale.format) + this.locale.separator + end.format(this.locale.format));
+                    this.element.trigger('change');
+                } else if (this.element.is('input')) {
+                    this.element.val(start.format(this.locale.format));
+                    this.element.trigger('change');
+                }
+                var val = start.format(opts.locale.format);
+                modelCtrl.$setViewValue(val);
+            });
 
             modelCtrl.$formatters.push(function (objValue) {
                 var f = function (date) {
